@@ -1,0 +1,1 @@
+//How the Items will look on the home page
