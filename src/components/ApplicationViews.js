@@ -1,6 +1,7 @@
 import React from "react"
-import { ItemProvider } from "./items/ItemProvider";
-import { ItemList } from "./items/ItemList";
+import { Route } from "react-router-dom"
+// import { ItemProvider } from "./items/ItemProvider";
+// import { ItemList } from "./items/ItemList";
 
 export const ApplicationViews = (props) => {
     return (
@@ -8,23 +9,14 @@ export const ApplicationViews = (props) => {
             <Route path="/logout" render={
                 (props) => {
                     localStorage.removeItem("kennel_customer")
-                    props.history.push("/login")
+                    props.history.push("/home")
                 }
             } />
-
-            <LocationProvider>
-                <AnimalProvider>
-                    <EmployeeProvider>
-                        <Route exact path="/">
-                            <LocationList />
-                        </Route>
-                        <Route path="/locations/:locationId(\d+)" render={
-                            props => <LocationDetail {...props} />
-                        } />
-                    </EmployeeProvider>
-                </AnimalProvider>
-                {/* Render the location list when http://localhost:3000/ */}
-            </LocationProvider>
+            {/* <ItemProvider>
+                <Route exact path="/homepage">
+                    <ItemList />
+                </Route>
+            </ItemProvider> */}
         </>
     )
 }
