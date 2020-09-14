@@ -12,10 +12,10 @@ export const ItemList = props => {
 
     return (
         <div>
-            <h1>Items</h1>
+            <h1>PATH SO FAR</h1>
 
-            <button onClick={() => props.history.push("/create__new_item")}>
-                Add item
+            <button onClick={() => props.history.push("/create__new_consumption")}>
+                +
             </button>
 
             <article className="itemList items">
@@ -23,7 +23,7 @@ export const ItemList = props => {
                     items.map(item => {
                         return <section className="item" key={item.id}> 
                             <Link  to={`/${item.id}`}>
-                                <h3>{item.name}</h3>
+                                <h3>{item.name} - {item.size}oz</h3>
                             </Link>                           
                         </section>
                     })
