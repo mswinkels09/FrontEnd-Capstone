@@ -17,10 +17,10 @@ export const Capstone = () => (
                     </>
                 )
             } else {
-                return <Redirect to="/" />
+                return <Redirect to="/home" />
             }
         }} />
-        <Route path="/" render={props => <Home {...props} />} />
+        <Route path="/home" render={props => <Home {...props} />} />
         <Route path="/login" render={props => <Login {...props} />} />
         <Route path="/register" render={props => <Register {...props} />} />
     </>
