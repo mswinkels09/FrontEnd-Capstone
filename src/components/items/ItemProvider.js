@@ -30,7 +30,7 @@ export const ItemProvider = (props) => {
     }
 
     const getItemById = (id) => {
-        return fetch(`http://localhost:8088/items/${ id }?_expand=size&_expand=user`)
+        return fetch(`http://localhost:8088/items/${ id }?_expand=user`)
             .then(res => res.json())
     }
     

@@ -1,10 +1,8 @@
 import React, { useContext, useRef, useEffect, useState } from "react"
 import { ItemContext } from "./ItemProvider"
-import { SizeContext } from "../sizes/SizeProvider"
 
 export const ItemForm = (props) => {
     const { addItem } = useContext(ItemContext)
-    const { sizes, getSizes, addSize } = useContext(SizeContext)
 
 
     const [item, setItem] = useState({})
@@ -25,27 +23,16 @@ export const ItemForm = (props) => {
     /*
         Get animal state and location state on initialization.
     */
-    useEffect(() => {
-       getSizes()
-    }, [])
 
     const constructNewItem = () => {
-
-        const sizeId = parseInt(item.sizeId)
-
-        addItem({
-            customerId: parseInt(localStorage.getItem("user")),
+    addItem({
+            userId: parseInt(localStorage.getItem("user")),
             name: name.current.value,
-            sizeId: sizeId,
-            calories: calories.current.value,
-            sugar: sugar.current.value,
-            cost: cost.current.value
-
+            size: parseInt(size.current.value),
+            calories: parseInt(calories.current.value),
+            sugar: parseInt(sugar.current.value),
+            cost: parseInt(cost.current.value)
         })
-        .then(addSize({
-            size: size.current.value
-
-        }))
         .then(() => props.history.push("/"))
         }
 
@@ -61,19 +48,19 @@ export const ItemForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="size">Item size: </label>
-                    <input type="text" id="itemSize" ref={size} required autoFocus className="form-control" placeholder="Item size" />
+                    <input type="number" id="itemSize" ref={size} required autoFocus className="form-control" placeholder="Item size in oz" />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="calories">Number of Calories per serving: </label>
-                    <input type="text" id="itemCalories" ref={calories} required autoFocus className="form-control" placeholder="Calories per serving" />
+                    <input type="number" id="itemCalories" ref={calories} required autoFocus className="form-control" placeholder="Calories per serving" />
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="location">Grams of sugar per serving: </label>
-                    <input type="text" id="itemSugar" ref={sugar} required autoFocus className="form-control" placeholder="sugar amount" />
+                    <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control" placeholder="sugar amount" />
                 </div>
             </fieldset>
             <fieldset>
