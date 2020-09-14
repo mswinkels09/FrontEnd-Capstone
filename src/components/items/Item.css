@@ -1,0 +1,18 @@
+h1 {
+    display: flex;
+    align-self: center;
+}
+
+.btn__add_consumption {
+    
+    height: 50px;
+    width: 50px;
+    font-size: 50px;
+    text-align: center;
+}
+
+span {
+    padding-bottom: 50px;
+    margin-bottom: 10px;
+
+}
