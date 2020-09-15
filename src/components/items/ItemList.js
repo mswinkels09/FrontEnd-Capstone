@@ -1,7 +1,7 @@
 //What the home page will look like with all the items listed
 import React, { useContext, useEffect } from "react"
 import { ItemContext } from "./ItemProvider"
-import { Link } from "react-router-dom"
+import Item from "./Item";
 import "./Item.css"
 
 export const ItemList = props => {
@@ -25,11 +25,7 @@ export const ItemList = props => {
             <article className="itemList items">
                 {
                     items.map(item => {
-                        return <section className="item" key={item.id}> 
-                            <Link  to={`/${item.id}`}>
-                                <h3>{item.name} - {item.size}oz</h3>
-                            </Link>                           
-                        </section>
+                        return <Item key={item.id} item={item} />
                     })
                 }
             </article>
