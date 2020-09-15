@@ -16,10 +16,8 @@ export const ItemList = props => {
             <header className="header">
                 <h1>PATH SO FAR</h1>
                 <div className="div__add_consumption">
-                    <button className="btn__add_consumption" onClick={() => props.history.push("/create__new_consumption")}>
-                        <span>
+                    <button className="btn__add_consumption" onClick={() => props.history.push("/track_consumption")}>
                             +
-                        </span>
                     </button>
                 </div>
             </header>

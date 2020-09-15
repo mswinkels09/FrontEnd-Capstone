@@ -1,10 +1,12 @@
 header {
-    display: flex;
-    flex-flow: row;
     margin: 0;
     border: 2px black solid;
+}
+.header {
     justify-content: space-between;
     text-align: center;
+    display: flex;
+    flex-flow: row;
 }
 
 h1 {

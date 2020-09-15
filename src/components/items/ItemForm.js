@@ -38,7 +38,12 @@ export const ItemForm = (props) => {
 
     return (
         <form className="newItemForm">
-            <h2 className="itemForm__title">New Item</h2>
+            <header className="header">
+                <h1 className="itemForm__title">New Item</h1>
+                <button className="btn__back_consumption" onClick={() => {
+                    props.history.push("/track_consumption")
+                }}>X</button>
+            </header>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="itemName">Item name: </label>
