@@ -21,10 +21,10 @@ export const ApplicationViews = (props) => {
                     <Route exact path="/" render={
                         props => <ItemList {...props} />
                     } />
-                    <Route path="/create__new_item" render={
+                    <Route path="/new_item" render={
                         props => <ItemForm {...props}/>
                     } />
-                    <Route path="/create__new_consumption" render={
+                    <Route path="/track_consumption" render={
                         props => <ConsumptionForm {...props}/>
                     } />
                     {/* <Route path="/:itemId(\d+)" render={

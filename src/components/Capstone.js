@@ -2,6 +2,7 @@ import React from "react"
 import { Route, Redirect } from "react-router-dom"
 import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./navbar/NavBar"
+import "./Capstone.css"
 import { Login } from "./auth/Login"
 import { Home } from "./auth/Home";
 import { Register } from "./auth/Register"

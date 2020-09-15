@@ -43,7 +43,12 @@ export const ConsumptionForm = (props) => {
 
     return (
         <form className="newConsumptionForm">
-            <h2 className="consumptionForm__title">Track Consumption</h2>
+            <header className="header">
+                <h2 className="consumptionForm__title">Track Consumption</h2>
+                <button className="btn__back_home" onClick={() => {
+                    props.history.push("/")
+                }}>Back</button>
+            </header>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="itemName">Item name: </label>
@@ -77,7 +82,7 @@ export const ConsumptionForm = (props) => {
                 className="btn btn-primary">
                 Submit
             </button>
-            <button onClick={() => props.history.push("/create__new_item")}>
+            <button onClick={() => props.history.push("/new_item")}>
                 Add Item
             </button>
         </form>

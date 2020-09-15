@@ -1,0 +1,15 @@
+header {
+    margin: 0;
+    border: 2px black solid;
+}
+.header {
+    justify-content: space-between;
+    text-align: center;
+    display: flex;
+    flex-flow: row;
+}
+
+h1 {
+    display: flex;
+    align-self: center;
+}
