@@ -1,9 +1,10 @@
 //how each item will be represented on DOM
 import React from "react"
-import { Link } from "react-router-dom"
-import { ServingsDetail } from "../consumption/ConsumptionDetail";
+
 
 export const Progress = ({ item, hours, calories, sugar, cost }) => {
+    
+
     return( 
         <section className="item">
             <h3 className="item__name"><strong>

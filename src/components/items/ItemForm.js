@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect, useState } from "react"
 import { ItemContext } from "./ItemProvider"
 
 export const ItemForm = (props) => {
-    const { addItem } = useContext(ItemContext)
+    const { addItem, items, updateItem, getItems } = useContext(ItemContext)
 
 
     const [item, setItem] = useState({})
@@ -14,6 +14,37 @@ export const ItemForm = (props) => {
 
         No more `document.querySelector()` in React.
     */
+
+   const editMode = props.match.params.hasOwnProperty("itemId")
+
+   const handleControlledInputChange = (event) => {
+    /*
+        When changing a state object or array, always create a new one
+        and change state instead of modifying current one
+    */
+        const newItem = Object.assign({}, item)
+        newItem[event.target.id] = event.target.value
+        setItem(newItem)
+    }
+
+    const getItemInEditMode = () => {
+        if (editMode) {
+            const itemId = parseInt(props.match.params.itemId)
+            const selectedItem = items.find(i => i.id === itemId) || {}
+            setItem(selectedItem)
+        }
+    }
+
+    // Get animals from API when component initializes
+    useEffect(() => {
+        getItems()
+    }, [])
+
+    // Once provider state is updated, determine the animal (if edit)
+    useEffect(() => {
+        getItemInEditMode()
+    }, [items])
+
     const name = useRef(null)
     const size = useRef(null)
     const calories = useRef(null)
@@ -25,14 +56,26 @@ export const ItemForm = (props) => {
     */
 
     const constructNewItem = () => {
-    addItem({
-            name: name.current.value,
-            size: parseInt(size.current.value),
-            calories: parseInt(calories.current.value),
-            sugar: parseInt(sugar.current.value),
-            cost: parseInt(cost.current.value)
-        })
-        .then(() => props.history.push("/"))
+        if(editMode) {
+            updateItem({
+                id: item.id,
+                name: name.current.value,
+                size: parseInt(size.current.value),
+                calories: parseInt(calories.current.value),
+                sugar: parseInt(sugar.current.value),
+                cost: parseInt(cost.current.value)
+            })
+            .then(() => props.history.push(`/${item.id}`))
+        } else {
+            addItem({
+                    name: name.current.value,
+                    size: parseInt(size.current.value),
+                    calories: parseInt(calories.current.value),
+                    sugar: parseInt(sugar.current.value),
+                    cost: parseInt(cost.current.value)
+                })
+                .then(() => props.history.push("/"))
+                }
         }
 
     return (
@@ -46,31 +89,47 @@ export const ItemForm = (props) => {
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="itemName">Item name: </label>
-                    <input type="text" id="itemName" ref={name} required autoFocus className="form-control" placeholder="Item name" />
+                    <input type="text" id="itemName" ref={name} required autoFocus className="form-control"
+                     proptype="varchar" 
+                     placeholder="Item name" 
+                     defaultValue={item.name} 
+                     onChange={handleControlledInputChange}/>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="size">Item size: </label>
-                    <input type="number" id="itemSize" ref={size} required autoFocus className="form-control" placeholder="Item size in oz" />
+                    <input type="number" id="itemSize" ref={size} required autoFocus className="form-control" 
+                    placeholder="Item size in oz"
+                    defaultValue={item.size}
+                    onChange={handleControlledInputChange}/>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="calories">Number of Calories per serving: </label>
-                    <input type="number" id="itemCalories" ref={calories} required autoFocus className="form-control" placeholder="Calories per serving" />
+                    <input type="number" id="itemCalories" ref={calories} required autoFocus className="form-control" 
+                    placeholder="Calories per serving" 
+                    defaultValue={item.calories}
+                    onChange={handleControlledInputChange}/>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">Grams of sugar per serving: </label>
-                    <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control" placeholder="sugar amount" />
+                    <label htmlFor="sugar">Grams of sugar per serving: </label>
+                    <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control" 
+                    placeholder="sugar amount" 
+                    defaultValue={item.sugar}
+                    onChange={handleControlledInputChange}/>
                 </div>
             </fieldset>
             <fieldset>
                 <div className="form-group">
-                    <label htmlFor="location">Cost of item: $</label>
-                    <input type="text" id="itemCost" ref={cost} required autoFocus className="form-control" placeholder="Item cost" />
+                    <label htmlFor="cost">Cost of item: $</label>
+                    <input type="text" id="itemCost" ref={cost} required autoFocus className="form-control" 
+                    placeholder="Item cost"
+                    defaultValue={item.cost}
+                    onChange={handleControlledInputChange} />
                 </div>
             </fieldset>
             <button type="submit"
@@ -79,7 +138,8 @@ export const ItemForm = (props) => {
                     constructNewItem()
                 }}
                 className="btn btn-primary">
-                Submit
+                {editMode ? "Save Updates" : "Submit"}
+                
             </button>
         </form>
     )
