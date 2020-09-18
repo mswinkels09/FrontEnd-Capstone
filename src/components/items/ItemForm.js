@@ -26,7 +26,6 @@ export const ItemForm = (props) => {
 
     const constructNewItem = () => {
     addItem({
-            userId: parseInt(localStorage.getItem("user")),
             name: name.current.value,
             size: parseInt(size.current.value),
             calories: parseInt(calories.current.value),
