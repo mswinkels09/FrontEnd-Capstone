@@ -3,6 +3,7 @@ import { Route } from "react-router-dom"
 import { ItemProvider } from "./items/ItemProvider";
 import { ItemList } from "./items/ItemList";
 import { ItemForm } from "./items/ItemForm";
+import { ItemDetail } from "./items/ItemDetail";
 import { ConsumptionProvider } from "./consumption/ConsumptionProvider";
 import { ConsumptionForm } from "./consumption/ConsumptionForm";
 import { UserProvider } from "./users/UserProvider";
@@ -32,9 +33,12 @@ export const ApplicationViews = (props) => {
                         <Route path="/progress" render={
                             props => <ProgressList {...props}/>
                         } />
-                        {/* <Route path="/:itemId(\d+)" render={
+                        <Route path="/:itemId(\d+)" render={
                             props => <ItemDetail {...props} />
-                        } /> */}
+                        } />
+                        <Route path="/edit/:itemId(\d+)" render={
+                            props => <ItemForm {...props} />
+                        } /> 
                     </ConsumptionProvider>
                 </ItemProvider>
             </UserProvider>
