@@ -13,11 +13,14 @@ export const ProgressList = props => {
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
+    const userItemObj = itemConsumptions.filter(item => {
+        const userItemFound = item.consumptions.find(c => {
+            return c.userId === currentUserId}) || {}
+        const userItemId = userItemFound.userId
+        return userItemId
+    }) 
 
-    // const overallCalories = consumptions.filter(c => {
-    //    sumOfCalories =+ c.calories > 0
-    // })
-
+        
     const [ selectedItem, setSelectedItem ] = useState([])
 
     const handleControlledInputChange = (itemObj) => {
@@ -39,19 +42,22 @@ export const ProgressList = props => {
     useEffect(() => {
         getItems()
         getConsumptionByItem()
-        // getCurrentUser()
-        // getUserConsumptions(currentUserId)
+        getCurrentUser()
+        getUserConsumptions(currentUserId)
     }, [])
     
-    // const itemId = parseInt(item.current.value)
-
-
     return (
         <div>
             <header className="header">
                 <h1>PROGRESS</h1>
             </header>
 
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
+                Todays Consumptions
+            </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
+                Months Consumptions
+            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
@@ -59,19 +65,17 @@ export const ProgressList = props => {
                         <select name="itemSelect" id="itemSelect" className="form-control" 
                             proptype="int"
                             onChange={handleControlledInputChange}>
-
+                            
                             <option value="0">Select a item</option>
-                            {items.map(item => (
-                                <option key={item.id} value={item.id}>
-                                    {item.name} - {item.size} oz
-                                </option>
+                                {userItemObj.map(item => (
+                                    <option key={item.id} value={item.id}>{item.name} - {item.size} oz</option>
+
                             ))}
                         </select>
                     </div>
                 </fieldset>
                 { 
                     itemConsumptions.map(item => {
-                        
                         let totalItemConsumption = 0
                         let totalCalories = 0
                         let totalSugarIntake = 0
@@ -79,32 +83,28 @@ export const ProgressList = props => {
                         let hoursSinceConsumed = 0
                         const currentTime = new Date()
 
-                        if( item.id === parseInt(selectedItem.itemSelect)) {
+                            if( item.id === parseInt(selectedItem.itemSelect)) {
 
-                            item.consumptions.forEach(consumption => {
-                                
+                                item.consumptions.forEach(consumption => {
                                     
-                                totalItemConsumption += consumption.servings
+                                        
+                                    totalItemConsumption += consumption.servings
+                                        
+                                        totalCalories += item.calories * totalItemConsumption
+                                        totalSugarIntake += item.sugar * totalItemConsumption
+                                        totalCost += item.cost * totalItemConsumption
+                                        const consumptionTime = new Date(consumption.time)
+                                        hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
                                     
-                                    totalCalories += item.calories * totalItemConsumption
-                                    totalSugarIntake += item.sugar * totalItemConsumption
-                                    totalCost += item.cost * totalItemConsumption
-                                    // console.log(totalCalories)
-                                    const consumptionTime = new Date(consumption.time)
-                                    hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
-                                    // console.log(hoursSinceConsumed)
-                                
-                                })
-                                return <Progress key={item.id}
-                                item={itemFound()}
-                                calories={totalCalories }
-                                sugar={totalSugarIntake}
-                                cost={totalCost}
-                                hours={hoursSinceConsumed}
-                                />
-                        }
-                        // debugger
-
+                                    })
+                                    return <Progress key={item.id}
+                                    item={itemFound()}
+                                    calories={totalCalories }
+                                    sugar={totalSugarIntake}
+                                    cost={totalCost}
+                                    hours={hoursSinceConsumed}
+                                    />
+                            }
 
                         })
                 }

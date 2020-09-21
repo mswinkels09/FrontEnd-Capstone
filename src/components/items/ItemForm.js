@@ -56,6 +56,7 @@ export const ItemForm = (props) => {
     */
 
     const constructNewItem = () => {
+        debugger
         if(editMode) {
             updateItem({
                 id: item.id,
@@ -74,7 +75,7 @@ export const ItemForm = (props) => {
                     sugar: parseInt(sugar.current.value),
                     cost: parseInt(cost.current.value)
                 })
-                .then(() => props.history.push("/"))
+                .then(() => props.history.push("/track_consumption"))
                 }
         }
 
