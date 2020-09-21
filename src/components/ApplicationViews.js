@@ -8,6 +8,8 @@ import { ConsumptionProvider } from "./consumption/ConsumptionProvider";
 import { ConsumptionForm } from "./consumption/ConsumptionForm";
 import { UserProvider } from "./users/UserProvider";
 import { ProgressList } from "./progress/ProgressList";
+import { TodayProgressList } from "./progress/TodayProgressList";
+import { MonthProgressList } from "./progress/MonthProgressList";
 
 export const ApplicationViews = (props) => {
     return (
@@ -30,7 +32,7 @@ export const ApplicationViews = (props) => {
                         <Route path="/track_consumption" render={
                             props => <ConsumptionForm {...props}/>
                         } />
-                        <Route path="/progress" render={
+                        <Route exact path="/progress" render={
                             props => <ProgressList {...props}/>
                         } />
                         <Route path="/:itemId(\d+)" render={
@@ -38,6 +40,12 @@ export const ApplicationViews = (props) => {
                         } />
                         <Route path="/edit/:itemId(\d+)" render={
                             props => <ItemForm {...props} />
+                        } /> 
+                        <Route path="/progress/today" render={
+                            props => <TodayProgressList {...props} />
+                        } /> 
+                        <Route path="/progress/month" render={
+                            props => <MonthProgressList {...props} />
                         } /> 
                     </ConsumptionProvider>
                 </ItemProvider>

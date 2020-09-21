@@ -13,12 +13,16 @@ export const ProgressList = props => {
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
+    const userItemObj = itemConsumptions.filter(item => {
+        const userItemFound = item.consumptions.find(c => {
+            return c.userId === currentUserId
+        }) || {}
+        const userItemId = userItemFound.userId
+        return userItemId
+    })
 
-    // const overallCalories = consumptions.filter(c => {
-    //    sumOfCalories =+ c.calories > 0
-    // })
 
-    const [ selectedItem, setSelectedItem ] = useState([])
+    const [selectedItem, setSelectedItem] = useState([])
 
     const handleControlledInputChange = (itemObj) => {
         const filteredItem = Object.assign({}, selectedItem)
@@ -27,51 +31,52 @@ export const ProgressList = props => {
     }
 
     const itemFound = () => {
-       const foundItem = itemConsumptions.find( c => {
-            return  c.id === parseInt(selectedItem.itemSelect)
+        const foundItem = itemConsumptions.find(c => {
+            return c.id === parseInt(selectedItem.itemSelect)
         })
-        || {}
+            || {}
         return foundItem
     }
 
 
-    
+
     useEffect(() => {
         getItems()
         getConsumptionByItem()
-        // getCurrentUser()
-        // getUserConsumptions(currentUserId)
+        getCurrentUser()
+        getUserConsumptions(currentUserId)
     }, [])
-    
-    // const itemId = parseInt(item.current.value)
-
 
     return (
         <div>
             <header className="header">
-                <h1>PROGRESS</h1>
+                <h1>OVERALL PROGRESS</h1>
             </header>
 
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
+                Today's Consumptions
+            </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
+                Month's Consumptions
+            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
                         <label htmlFor="itemSelect">Item select: </label>
-                        <select name="itemSelect" id="itemSelect" className="form-control" 
+                        <select name="itemSelect" id="itemSelect" className="form-control"
                             proptype="int"
                             onChange={handleControlledInputChange}>
 
                             <option value="0">Select a item</option>
-                            {items.map(item => (
-                                <option key={item.id} value={item.id}>
-                                    {item.name} - {item.size} oz
-                                </option>
+                            {userItemObj.map(item => (
+                                <option key={item.id} value={item.id}>{item.name} - {item.size} oz</option>
+
                             ))}
                         </select>
                     </div>
                 </fieldset>
-                { 
+                {
                     itemConsumptions.map(item => {
-                        
                         let totalItemConsumption = 0
                         let totalCalories = 0
                         let totalSugarIntake = 0
@@ -79,34 +84,39 @@ export const ProgressList = props => {
                         let hoursSinceConsumed = 0
                         const currentTime = new Date()
 
-                        if( item.id === parseInt(selectedItem.itemSelect)) {
+                        if (item.id === parseInt(selectedItem.itemSelect)) {
 
                             item.consumptions.forEach(consumption => {
-                                
-                                    
+
+
                                 totalItemConsumption += consumption.servings
-                                    
-                                    totalCalories += item.calories * totalItemConsumption
-                                    totalSugarIntake += item.sugar * totalItemConsumption
-                                    totalCost += item.cost * totalItemConsumption
-                                    // console.log(totalCalories)
-                                    const consumptionTime = new Date(consumption.time)
-                                    hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
-                                    // console.log(hoursSinceConsumed)
-                                
-                                })
-                                return <Progress key={item.id}
+
+                                totalCalories = item.calories * totalItemConsumption
+                                totalSugarIntake = item.sugar * totalItemConsumption
+                                totalCost = item.cost * totalItemConsumption
+
+                            })
+                            let hoursSinceConsumed = 0
+
+                            const currentTime = new Date()
+
+                            const sortedConsumptionTimes = item.consumptions.sort((a, b) => { return new Date(b.time) - new Date(a.time) })
+
+                            sortedConsumptionTimes.find(consumption => {
+                                const consumptionTime = new Date(consumption.time)
+                                return hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime()) / (1000 * 60 * 60)).toFixed(1)
+                            })
+
+                            return <Progress key={item.id}
                                 item={itemFound()}
-                                calories={totalCalories }
+                                calories={totalCalories}
                                 sugar={totalSugarIntake}
                                 cost={totalCost}
                                 hours={hoursSinceConsumed}
-                                />
+                            />
                         }
-                        // debugger
 
-
-                        })
+                    })
                 }
             </article>
         </div>

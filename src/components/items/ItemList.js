@@ -13,12 +13,6 @@ export const ItemList = props => {
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
-    // const itemUserId = itemConsumptions.map(item => {
-    //     item.consumptions.find(c => {
-    //         c.userId === parseInt(props.match.params.userId)
-    //     })
-    // }) || {}
-
     useEffect(() => {
         getConsumptionByItem()
         getCurrentUser()
@@ -39,25 +33,32 @@ export const ItemList = props => {
             <article className="itemList items">
                 {
                     itemConsumptions.map(item => {
-                        let totalItemConsumption = 0
                         
-                        item.consumptions.forEach(consumption => {
-                            totalItemConsumption += consumption.servings
-                    })
-                        let hoursSinceConsumed = 0
-                        const currentTime = new Date()
+                        const userItemObj = item.consumptions.find(c => {
+                                return c.userId === currentUserId}) || {}
                         
-                        item.consumptions.forEach(consumption => {
-                            const consumptionTime = new Date(consumption.time)
-                            hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)
-
-                        console.log(hoursSinceConsumed)
-                    })
-                    return <Item key={item.id}
-                    item={item}
-                    servings={totalItemConsumption}
-
-                    hours={hoursSinceConsumed} />
+                        if(userItemObj.userId === currentUserId) {                           
+                            let totalItemConsumption = 0
+                                item.consumptions.forEach(consumption => {
+                                    totalItemConsumption += consumption.servings
+                                })
+                                let hoursSinceConsumed = 0
+                                
+                            
+                                const currentTime = new Date()
+                               
+                                const sortedConsumptionTimes = item.consumptions.sort((a,b) => {return new Date(b.time) - new Date(a.time)})
+                                
+                                sortedConsumptionTimes.find(consumption => {
+                                    const consumptionTime = new Date(consumption.time)
+                                   return hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)
+                                })
+                                return <Item key={item.id}
+                                item={item}
+                                servings={totalItemConsumption}
+            
+                                hours={hoursSinceConsumed} />                        
+                        }
                     })
                 }
             </article>
