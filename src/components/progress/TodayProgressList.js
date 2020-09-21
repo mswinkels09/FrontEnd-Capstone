@@ -55,6 +55,12 @@ export const TodayProgressList = props => {
             <header className="header">
                 <h1>TODAY'S PROGRESS</h1>
             </header>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress")}>
+                Overall Consumptions
+            </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
+                Month's Consumptions
+            </button>
 
             <article className="progressList">
                 <fieldset>
@@ -95,7 +101,6 @@ export const TodayProgressList = props => {
                                     const totalTodaySugar = (consumption.servings * item.sugar) + todaysConsumptionsObj[consumption.itemId].sugar
                                     const totalTodayCost = (consumption.servings * item.cost) + todaysConsumptionsObj[consumption.itemId].cost
                                     todaysConsumptionsObj[consumption.itemId] = { "calories": totalTodayCalories, "sugar": totalTodaySugar, "cost": totalTodayCost }
-                                    console.log(todaysConsumptionsObj)
                                 } else {
                                     todaysConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
 
@@ -105,7 +110,6 @@ export const TodayProgressList = props => {
 
                             })
                             return Object.keys(todaysConsumptionsObj).map(key => {
-                                console.log(todaysConsumptionsObj[key])
                                 return <TodayProgress key={key}
                                     item={itemFound()}
                                     calories={todaysConsumptionsObj[key].calories}

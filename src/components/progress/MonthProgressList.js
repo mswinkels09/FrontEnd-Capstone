@@ -53,9 +53,14 @@ export const MonthProgressList = props => {
     return (
         <div>
             <header className="header">
-                <h1>Month'S PROGRESS</h1>
+                <h1>Month's PROGRESS</h1>
             </header>
-
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress")}>
+                Overall Consumptions
+            </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
+                Today's Consumptions
+            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
@@ -95,7 +100,6 @@ export const MonthProgressList = props => {
                                     const totalMonthSugar = (consumption.servings * item.sugar) + monthsConsumptionsObj[consumption.itemId].sugar
                                     const totalMonthCost = (consumption.servings * item.cost) + monthsConsumptionsObj[consumption.itemId].cost
                                     monthsConsumptionsObj[consumption.itemId] = { "calories": totalMonthCalories, "sugar": totalMonthSugar, "cost": totalMonthCost }
-                                    console.log(monthsConsumptionsObj)
                                 } else {
                                     monthsConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
 
@@ -105,7 +109,6 @@ export const MonthProgressList = props => {
 
                             })
                             return Object.keys(monthsConsumptionsObj).map(key => {
-                                console.log(monthsConsumptionsObj[key])
                                 return <MonthProgress key={key}
                                     item={itemFound()}
                                     calories={monthsConsumptionsObj[key].calories}
