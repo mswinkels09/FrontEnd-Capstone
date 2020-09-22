@@ -7,7 +7,6 @@ import { ItemContext } from "../items/ItemProvider";
 
 
 export const MonthProgressList = props => {
-    debugger
     const { getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
     const { getCurrentUser, currentUser } = useContext(UserContext)
     const { getItems, setItems, items } = useContext(ItemContext)
@@ -61,6 +60,9 @@ export const MonthProgressList = props => {
             <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
                 Today's Consumptions
             </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
+                Week's Consumptions
+            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
@@ -93,7 +95,6 @@ export const MonthProgressList = props => {
                             let monthsConsumptionsObj = {}
 
                             monthsConsumptionsArray.forEach(consumption => {
-                                debugger
 
                                 if (Object.keys(monthsConsumptionsObj).includes(consumption.itemId.toString())) {
                                     const totalMonthCalories = (consumption.servings * item.calories) + monthsConsumptionsObj[consumption.itemId].calories

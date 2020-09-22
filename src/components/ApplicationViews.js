@@ -10,6 +10,8 @@ import { UserProvider } from "./users/UserProvider";
 import { ProgressList } from "./progress/ProgressList";
 import { TodayProgressList } from "./progress/TodayProgressList";
 import { MonthProgressList } from "./progress/MonthProgressList";
+import { WeekProgressList } from "./progress/WeekProgressList";
+
 
 export const ApplicationViews = (props) => {
     return (
@@ -46,6 +48,9 @@ export const ApplicationViews = (props) => {
                         } /> 
                         <Route path="/progress/month" render={
                             props => <MonthProgressList {...props} />
+                        } /> 
+                        <Route path="/progress/week" render={
+                            props => <WeekProgressList {...props} />
                         } /> 
                     </ConsumptionProvider>
                 </ItemProvider>

@@ -56,7 +56,6 @@ export const ItemForm = (props) => {
     */
 
     const constructNewItem = () => {
-        debugger
         if(editMode) {
             updateItem({
                 id: item.id,
