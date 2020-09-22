@@ -1,12 +1,12 @@
 //What the home page will look like with all the items listed
 import React, { useContext, useEffect, useState } from "react"
-import { TodayProgress } from "./TodayProgress";
+import { WeekProgress } from "./WeekProgress";
 import { UserContext } from "../users/UserProvider";
 import { ConsumptionContext } from "../consumption/ConsumptionProvider";
 import { ItemContext } from "../items/ItemProvider";
 
 
-export const TodayProgressList = props => {
+export const WeekProgressList = props => {
     const { getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
     const { getCurrentUser, currentUser } = useContext(UserContext)
     const { getItems, setItems, items } = useContext(ItemContext)
@@ -52,18 +52,17 @@ export const TodayProgressList = props => {
     return (
         <div>
             <header className="header">
-                <h1>TODAY'S PROGRESS</h1>
+                <h1>Week's PROGRESS</h1>
             </header>
             <button className="btn__todays_progress" onClick={() => props.history.push("/progress")}>
                 Overall Consumptions
             </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
+                Today's Consumptions
+            </button>
             <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
                 Month's Consumptions
             </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
-                Week's Consumptions
-            </button>
-
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
@@ -85,37 +84,41 @@ export const TodayProgressList = props => {
                     itemConsumptions.map(item => {
 
                         const currentTime = new Date()
-
+                        const weekConsumptionTime = currentTime.setDate(currentTime.getDate() - 7)
+                        
                         if (item.id === parseInt(selectedItem.itemSelect)) {
+                            
+                            const weeksConsumptionsArray = item.consumptions.filter(consumption => {
+                                const consumptionTime = new Date(consumption.time)                                
+                                const consumptionTimeArray = consumptionTime > new Date(weekConsumptionTime) && currentTime < consumptionTime
+                                // console.log(consumptionTimeArray)                                  
+                                return consumptionTimeArray
+                                })
+                                let weeksConsumptionsObj = {}
+                                
+                                weeksConsumptionsArray.forEach(consumption => {
+                                    console.log(weeksConsumptionsArray)
+                                        
+                                        if (Object.keys(weeksConsumptionsObj).includes(consumption.itemId.toString())) {
+                                            const totalWeekCalories = (consumption.servings * item.calories) + weeksConsumptionsObj[consumption.itemId].calories
+                                            const totalWeekSugar = (consumption.servings * item.sugar) + weeksConsumptionsObj[consumption.itemId].sugar
+                                            const totalWeekCost = (consumption.servings * item.cost) + weeksConsumptionsObj[consumption.itemId].cost
+                                            weeksConsumptionsObj[consumption.itemId] = { "calories": totalWeekCalories, "sugar": totalWeekSugar, "cost": totalWeekCost }
+                                        } else {
+                                            weeksConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
+                                            
+                                            
+                                        }
+                                        // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
+                                    
 
-                            const todaysConsumptionsArray = item.consumptions.filter(consumption => {
-                                const consumptionTime = new Date(consumption.time)
-
-                                return consumptionTime.getDate() === currentTime.getDate()
                             })
-                            let todaysConsumptionsObj = {}
-
-                            todaysConsumptionsArray.forEach(consumption => {
-
-                                if (Object.keys(todaysConsumptionsObj).includes(consumption.itemId.toString())) {
-                                    const totalTodayCalories = (consumption.servings * item.calories) + todaysConsumptionsObj[consumption.itemId].calories
-                                    const totalTodaySugar = (consumption.servings * item.sugar) + todaysConsumptionsObj[consumption.itemId].sugar
-                                    const totalTodayCost = (consumption.servings * item.cost) + todaysConsumptionsObj[consumption.itemId].cost
-                                    todaysConsumptionsObj[consumption.itemId] = { "calories": totalTodayCalories, "sugar": totalTodaySugar, "cost": totalTodayCost }
-                                } else {
-                                    todaysConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
-
-
-                                }
-                                // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
-
-                            })
-                            return Object.keys(todaysConsumptionsObj).map(key => {
-                                return <TodayProgress key={key}
+                            return Object.keys(weeksConsumptionsObj).map(key => {
+                                return <WeekProgress key={key}
                                     item={itemFound()}
-                                    calories={todaysConsumptionsObj[key].calories}
-                                    sugar={todaysConsumptionsObj[key].sugar}
-                                    cost={todaysConsumptionsObj[key].cost}
+                                    calories={weeksConsumptionsObj[key].calories}
+                                    sugar={weeksConsumptionsObj[key].sugar}
+                                    cost={weeksConsumptionsObj[key].cost}
                                 // hours={hoursSinceConsumed}
                                 />
                             })

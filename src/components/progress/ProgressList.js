@@ -59,6 +59,9 @@ export const ProgressList = props => {
             <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
                 Month's Consumptions
             </button>
+            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
+                Week's Consumptions
+            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
