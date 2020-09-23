@@ -32,7 +32,7 @@ export const Login = props => {
     }
 
     return (
-        <main className="container--login">
+        <main className="main">
             <dialog className="dialog dialog--auth" ref={existDialog}>
                 <div>User does not exist</div>
                 <button className="button--close" onClick={e => existDialog.current.close()}>Close</button>
@@ -42,16 +42,16 @@ export const Login = props => {
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
             <section>
-                <form className="form--login" onSubmit={handleLogin}>
+                <form className="form--home" onSubmit={handleLogin}>
                     <section className="login__inputs">
-                    <fieldset>
+                    <fieldset className="fieldset">
                         <input ref={email} type="email"
                             id="email"
                             className="form-control login__form"
                             placeholder="Email address"
                             required autoFocus />
                     </fieldset>
-                    <fieldset>
+                    <fieldset className="fieldset">
                         <input ref={password} type="password"
                             id="password"
                             className="form-control login__form"
@@ -59,15 +59,13 @@ export const Login = props => {
                             required />
                     </fieldset>
                     </section>
-                    <fieldset>
-                        <button type="submit" className="btn__home">
+                        <button type="submit" className="btn__login btn">
                             GET BACK AT IT
                         </button>
-                    </fieldset>
                 </form>
             </section>
             <section className="link--register">
-                <button className="btn__home" onClick={() => props.history.push("/login")}>
+                <button className="btn__login_register btn" onClick={() => props.history.push("/register")}>
                     FIRST TIME?
                 </button>
             </section>

@@ -7,7 +7,7 @@ export const NavBar = (props) => {
         <section className="navbar">
             <div className="navbar__item">
                 <Link className="navbar__link" to="/trophies">
-                    <img className="navbar__img" src="https://png.pngtree.com/png-vector/20190927/ourlarge/pngtree-trophy-icon-png-image_1753387.jpg"></img>
+                    <img className="navbar__img" src="https://www.iconfinder.com/data/icons/game-general-icon-set-1/512/trophy-512.png"></img>
                     <div className="navbar__title">Trophies</div>
                 </Link>
             </div>

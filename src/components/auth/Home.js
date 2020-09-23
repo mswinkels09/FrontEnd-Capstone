@@ -16,7 +16,7 @@ export const Home = (props) => (
 
             </div>
             <div className="register__button">
-                <Button variant="danger" className="btn__home" onClick={() => props.history.push("/register")}>
+                <Button variant="danger" className="btn__home btn" onClick={() => props.history.push("/register")}>
                     REGISTER
                 </Button>
             </div>
