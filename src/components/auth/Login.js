@@ -43,33 +43,33 @@ export const Login = props => {
             </dialog>
             <section>
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>RID THE DEW</h1>
-                    <h2>Please sign in</h2>
+                    <section className="login__inputs">
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
                         <input ref={email} type="email"
                             id="email"
-                            className="form-control"
+                            className="form-control login__form"
                             placeholder="Email address"
                             required autoFocus />
                     </fieldset>
                     <fieldset>
-                        <label htmlFor="inputPassword"> Password </label>
                         <input ref={password} type="password"
                             id="password"
-                            className="form-control"
+                            className="form-control login__form"
                             placeholder="Password"
                             required />
                     </fieldset>
+                    </section>
                     <fieldset>
-                        <button type="submit">
-                            Sign in
+                        <button type="submit" className="btn__home">
+                            GET BACK AT IT
                         </button>
                     </fieldset>
                 </form>
             </section>
             <section className="link--register">
-                <Link to="/register">First time?</Link>
+                <button className="btn__home" onClick={() => props.history.push("/login")}>
+                    FIRST TIME?
+                </button>
             </section>
         </main>
     )

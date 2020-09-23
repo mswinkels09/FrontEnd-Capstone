@@ -8,8 +8,8 @@ import { ItemContext } from "../items/ItemProvider";
 
 export const TodayProgressList = props => {
     const { getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
-    const { getCurrentUser, currentUser } = useContext(UserContext)
-    const { getItems, setItems, items } = useContext(ItemContext)
+    const { getCurrentUser} = useContext(UserContext)
+    const { getItems} = useContext(ItemContext)
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 

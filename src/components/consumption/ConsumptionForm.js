@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect, useState } from "react"
+import React, { useContext, useRef, useEffect} from "react"
 import { ConsumptionContext } from "./ConsumptionProvider";
 import { ItemContext } from "../items/ItemProvider"
 
@@ -6,8 +6,6 @@ export const ConsumptionForm = (props) => {
     const { addConsumption } = useContext(ConsumptionContext)
     const { items, getItems } = useContext(ItemContext)
 
-
-    const [consumption, setConsumption] = useState({})
     /*
         Create references that can be attached to the input
         fields in the form. This will allow you to get the
