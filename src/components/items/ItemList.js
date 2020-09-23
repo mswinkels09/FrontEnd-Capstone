@@ -20,7 +20,7 @@ export const ItemList = props => {
     }, [])
 
     return (
-        <div>
+        <div className="div__itemList">
             <header className="header">
                 <h1>PATH SO FAR</h1>
                 <div className="div__add_consumption">

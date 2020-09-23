@@ -1,7 +1,3 @@
-* {
-
-    background-color: #94c93d;
-}
 
 .home__title {
     font-size: 45px;
@@ -43,7 +39,16 @@
     margin-bottom: 20px;
     height: 60px;
     width: 200px;
+}
+
+.btn {
     background-color: #07703c;
-    color: white;
+    color: #ed1a37;
     font-weight: bold;
+    text-shadow:
+    3px  3px 0 #000,
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+   -1px  1px 0 #000,
+    1px  1px 0 #000;
 }

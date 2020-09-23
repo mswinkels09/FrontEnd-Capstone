@@ -1,5 +1,6 @@
 import React, { useContext, useRef, useEffect, useState } from "react"
 import { ItemContext } from "./ItemProvider"
+import "./ItemForms.css";
 
 export const ItemForm = (props) => {
     const { addItem, items, updateItem, getItems } = useContext(ItemContext)
@@ -81,66 +82,65 @@ export const ItemForm = (props) => {
     return (
         <form className="newItemForm">
             <header className="header">
-                <h1 className="itemForm__title">New Item</h1>
-                <button className="btn__back_consumption" onClick={() => {
+                <h1 className="itemForm__title">NEW ITEM</h1>
+                <button className="btn__back_consumption btn" onClick={() => {
                     props.history.push("/track_consumption")
-                }}>X</button>
+                }}>Back</button>
             </header>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="itemName">Item name: </label>
-                    <input type="text" id="itemName" ref={name} required autoFocus className="form-control"
-                     proptype="varchar" 
-                     placeholder="Item name" 
-                     defaultValue={item.name} 
-                     onChange={handleControlledInputChange}/>
+            <main className="main">
+                <div className="form--addItem form--item">
+                    <fieldset>
+                        <div className="form-group">
+                            <input type="text" id="itemName" ref={name} required autoFocus className="form-control item__form"
+                            proptype="varchar" 
+                            placeholder="Item name" 
+                            defaultValue={item.name} 
+                            onChange={handleControlledInputChange}/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div className="form-group">
+                            <input type="number" id="itemSize" ref={size} required autoFocus className="form-control item__form" 
+                            placeholder="Item size in oz"
+                            defaultValue={item.size}
+                            onChange={handleControlledInputChange}/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div className="form-group">
+                            <input type="number" id="itemCalories" ref={calories} required autoFocus className="form-control item__form" 
+                            placeholder="Calories per serving" 
+                            defaultValue={item.calories}
+                            onChange={handleControlledInputChange}/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div className="form-group">
+                            <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control item__form" 
+                            placeholder="sugar amount" 
+                            defaultValue={item.sugar}
+                            onChange={handleControlledInputChange}/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div className="form-group ">
+                            <input type="text" id="itemCost" ref={cost} required autoFocus className="form-control item__form" 
+                            placeholder="Item cost"
+                            defaultValue={item.cost}
+                            onChange={handleControlledInputChange} />
+                        </div>
+                    </fieldset>
+                    <button type="submit"
+                        onClick={evt => {
+                            evt.preventDefault() // Prevent browser from submitting the form
+                            constructNewItem()
+                        }}
+                        className="btn btn__item">
+                        {editMode ? "Save Updates" : "Submit"}
+                        
+                    </button>
                 </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="size">Item size: </label>
-                    <input type="number" id="itemSize" ref={size} required autoFocus className="form-control" 
-                    placeholder="Item size in oz"
-                    defaultValue={item.size}
-                    onChange={handleControlledInputChange}/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="calories">Number of Calories per serving: </label>
-                    <input type="number" id="itemCalories" ref={calories} required autoFocus className="form-control" 
-                    placeholder="Calories per serving" 
-                    defaultValue={item.calories}
-                    onChange={handleControlledInputChange}/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="sugar">Grams of sugar per serving: </label>
-                    <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control" 
-                    placeholder="sugar amount" 
-                    defaultValue={item.sugar}
-                    onChange={handleControlledInputChange}/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="cost">Cost of item: $</label>
-                    <input type="text" id="itemCost" ref={cost} required autoFocus className="form-control" 
-                    placeholder="Item cost"
-                    defaultValue={item.cost}
-                    onChange={handleControlledInputChange} />
-                </div>
-            </fieldset>
-            <button type="submit"
-                onClick={evt => {
-                    evt.preventDefault() // Prevent browser from submitting the form
-                    constructNewItem()
-                }}
-                className="btn btn-primary">
-                {editMode ? "Save Updates" : "Submit"}
-                
-            </button>
+            </main>
         </form>
     )
 }

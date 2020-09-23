@@ -3,11 +3,13 @@
     padding: 20px; 
     padding-top: 15px;
     display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
     bottom: 0;
     width: 100%;
     position: fixed;
+    padding-left: 0;
+    background-color: #07703c;
 }
 
 .navbar__link {

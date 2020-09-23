@@ -1,5 +1,6 @@
 //how each item will be represented on DOM
 import React from "react"
+import "./ProgressList.css";
 
 
 export const TodayProgress = ({ item, hours, calories, sugar, cost }) => {

@@ -1,7 +1,31 @@
+.div__itemList {
+    width:100%;
+}
+
+header {
+    width: auto;
+    margin: 0;
+    border: 2px black solid;
+}
+.header {
+    justify-content: space-between;
+    text-align: center;
+    display: flex;
+    flex-flow: row;
+    color: #ed1a37;
+    background-color: white;
+    text-shadow:
+    3px  3px 0 #000,
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+   -1px  1px 0 #000,
+    1px  1px 0 #000;
+}
 h1 {
     display: flex;
     align-self: center;
 }
+
 
 .div__add_consumption {
     display: flex;
@@ -19,8 +43,62 @@ h1 {
     text-align: center;
 }
 
-span {
-    padding-bottom: 50px;
-    margin-bottom: 10px;
+.item__name {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0;
+    padding: 5px;
+    color: #ed1a37;
+    
+}
 
+.item {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 5px;
+    padding: 0;
+    border: 3px solid black;
+    background-color: #07703c;
+}
+
+.items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    align-content: center;
+    margin-top: 15px;
+}
+.item__data {
+    
+    display: flex;
+    flex-direction: row;
+    margin:3px;
+    background-color: white;
+    color: #ed1a37;
+    font-weight: bold;
+}
+
+.item__data_div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.item__data_title {
+    border: 2px black solid;
+    font-size: 12px;
+    padding:2px;
+    width: 60%;
+}
+.item__data_data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px black solid;
+    font-size: 15px;
+    padding:2px;
+    width: 40%;
 }

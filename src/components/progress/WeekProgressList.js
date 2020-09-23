@@ -4,6 +4,7 @@ import { WeekProgress } from "./WeekProgress";
 import { UserContext } from "../users/UserProvider";
 import { ConsumptionContext } from "../consumption/ConsumptionProvider";
 import { ItemContext } from "../items/ItemProvider";
+import "./ProgressList.css";
 
 
 export const WeekProgressList = props => {

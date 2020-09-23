@@ -1,0 +1,38 @@
+.item_detail__header {
+    display: flex;
+}
+
+.item_detail__name {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+.item_detail__btn_close{
+align-self: flex-end;
+}
+
+.item_detail__btns {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px;
+}
+
+.item_detail {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    border: 2px black solid;
+    margin: 10px;
+    padding-left: 3px;
+    padding-top:5px;
+}
+
+.item_detail__btn{
+    height: 50px;
+    width: 110px;
+    font-size: 17px;
+}
+.itemDetail {
+    margin-top: 25%;
+    margin-left: 9%;
+}

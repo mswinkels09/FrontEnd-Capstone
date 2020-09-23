@@ -4,6 +4,7 @@ import { Progress } from "./Progress";
 import { UserContext } from "../users/UserProvider";
 import { ConsumptionContext } from "../consumption/ConsumptionProvider";
 import { ItemContext } from "../items/ItemProvider";
+import "./ProgressList.css";
 
 
 export const ProgressList = props => {
@@ -48,19 +49,9 @@ export const ProgressList = props => {
 
     return (
         <div>
-            <header className="header">
+            <header className="header progress__header">
                 <h1>OVERALL PROGRESS</h1>
             </header>
-
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
-                Today's Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
-                Month's Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
-                Week's Consumptions
-            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
@@ -78,6 +69,8 @@ export const ProgressList = props => {
                         </select>
                     </div>
                 </fieldset>
+                <section className="progress">
+
                 {
                     itemConsumptions.map(item => {
 
@@ -152,6 +145,18 @@ export const ProgressList = props => {
                             }
                     })
                 }
+                </section>
+                <div className="progress__btns">
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/today")}>
+                        Today
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/month")}>
+                        Month
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/week")}>
+                        Week
+                    </button>
+                </div>
             </article>
         </div>
     )
