@@ -1,5 +1,7 @@
 import React from "react"
 import { Route } from "react-router-dom"
+import { Register } from "./auth/Register";
+import { Login } from "./auth/Login";
 import { ItemProvider } from "./items/ItemProvider";
 import { ItemList } from "./items/ItemList";
 import { ItemForm } from "./items/ItemForm";
@@ -16,6 +18,12 @@ import { WeekProgressList } from "./progress/WeekProgressList";
 export const ApplicationViews = (props) => {
     return (
         <>
+            <Route path="/login" render={
+                props => <Login {...props} />
+            } />
+            <Route path="/register" render={
+                props => <Register {...props} />
+            } />
             <Route path="/logout" render={
                 (props) => {
                     localStorage.removeItem("user")

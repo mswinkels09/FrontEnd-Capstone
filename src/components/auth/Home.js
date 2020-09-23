@@ -1,22 +1,24 @@
 import  React  from "react"
-import { Link } from "react-router-dom"
+import Button from 'react-bootstrap/Button';
 import "./Home.css"
+import { ButtonGroup } from "react-bootstrap";
 
-export const Home = () => (
+export const Home = (props) => (
     <section className="home">
-        <header>
-            <h1 className="home__title">RID THE DEW</h1>
-        </header>
+        <div className="home__title_div">
+            <h1 className="home__title">WHAT NOT TO DEW</h1>
+        </div>
         <section className="auth">
             <div className="login__button">
-                <Link to={"/login"}>
+                <Button variant="success" className="btn__home" onClick={() => props.history.push("/login")}>
                     LOGIN
-                </Link>
+                </Button>
+
             </div>
             <div className="register__button">
-                <Link to={"/register"}>
+                <Button variant="danger" className="btn__home" onClick={() => props.history.push("/register")}>
                     REGISTER
-                </Link>
+                </Button>
             </div>
         </section>
     </section>

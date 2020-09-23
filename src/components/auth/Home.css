@@ -1,10 +1,49 @@
+* {
+
+    background-color: #94c93d;
+}
+
 .home__title {
+    font-size: 45px;
+    margin: 20px;
     display: flex;
     justify-content: center;
+    text-align: center;
+    color: #ed1a37;
+    text-shadow:
+    3px  3px 0 #000,
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+   -1px  1px 0 #000,
+    1px  1px 0 #000;
+    background-color: white;
+}
+
+.home__title_div {
+    border: 2px solid black;
+    margin: 20px;
+    height: 275px;
+    padding-left: 80px;
+    padding-right: 80px;
+    padding-top: 0;
+    background-color: white;
 }
 
 .auth {
     display: flex;
     flex-flow: column;
     align-items: center;
+}
+
+.login__button {
+    margin-top: 20px;
+}
+
+.btn__home {
+    margin-bottom: 20px;
+    height: 60px;
+    width: 200px;
+    background-color: #07703c;
+    color: white;
+    font-weight: bold;
 }

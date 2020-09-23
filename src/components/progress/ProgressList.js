@@ -7,9 +7,9 @@ import { ItemContext } from "../items/ItemProvider";
 
 
 export const ProgressList = props => {
-    const { consumptions, userConsumptions, getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
-    const { getCurrentUser, currentUser } = useContext(UserContext)
-    const { getItems, setItems, items } = useContext(ItemContext)
+    const { getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
+    const { getCurrentUser} = useContext(UserContext)
+    const { getItems} = useContext(ItemContext)
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
@@ -20,7 +20,6 @@ export const ProgressList = props => {
         const userItemId = userItemFound.userId
         return userItemId
     })
-
 
     const [selectedItem, setSelectedItem] = useState([])
 
@@ -68,9 +67,10 @@ export const ProgressList = props => {
                         <label htmlFor="itemSelect">Item select: </label>
                         <select name="itemSelect" id="itemSelect" className="form-control"
                             proptype="int"
+                            defaultValue=""
                             onChange={handleControlledInputChange}>
 
-                            <option value="0">Select a item</option>
+                            <option value="0">Overall Progress</option>
                             {userItemObj.map(item => (
                                 <option key={item.id} value={item.id}>{item.name} - {item.size} oz</option>
 
@@ -80,14 +80,17 @@ export const ProgressList = props => {
                 </fieldset>
                 {
                     itemConsumptions.map(item => {
+
+                        
                         let totalItemConsumption = 0
                         let totalCalories = 0
                         let totalSugarIntake = 0
                         let totalCost = 0
                         let hoursSinceConsumed = 0
                         const currentTime = new Date()
-
+                        
                         if (item.id === parseInt(selectedItem.itemSelect)) {
+                            console.log(selectedItem.itemSelect)
 
                             item.consumptions.forEach(consumption => {
 
@@ -117,8 +120,36 @@ export const ProgressList = props => {
                                 cost={totalCost}
                                 hours={hoursSinceConsumed}
                             />
-                        }
-
+                        } 
+                        else if (selectedItem.value === 0) {
+                                                         
+                                    item.consumptions.forEach(consumption => {
+                                        
+                                        totalItemConsumption += consumption.servings
+                                        
+                                        totalCalories = item.calories * totalItemConsumption
+                                        totalSugarIntake = item.sugar * totalItemConsumption
+                                        totalCost = item.cost * totalItemConsumption
+                                        
+                                    })
+                                    let hoursSinceConsumed = 0
+                                    
+                                    const currentTime = new Date()
+                                    
+                                    const sortedConsumptionTimes = item.consumptions.sort((a, b) => { return new Date(b.time) - new Date(a.time) })
+                                    
+                                    sortedConsumptionTimes.find(consumption => {
+                                        const consumptionTime = new Date(consumption.time)
+                                        return hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime()) / (1000 * 60 * 60)).toFixed(1)
+                                    })
+                                return <Progress key={item.id}
+                                    item={item}
+                                    calories={totalCalories}
+                                    sugar={totalSugarIntake}
+                                    cost={totalCost}
+                                    hours={hoursSinceConsumed}
+                                />
+                            }
                     })
                 }
             </article>
