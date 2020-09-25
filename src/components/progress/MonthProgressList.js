@@ -52,23 +52,13 @@ export const MonthProgressList = props => {
 
     return (
         <div>
-            <header className="header">
-                <h1>Month's PROGRESS</h1>
+            <header className="header progress__header">
+                <h1>MONTH'S PROGRESS</h1>
             </header>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress")}>
-                Overall Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/today")}>
-                Today's Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
-                Week's Consumptions
-            </button>
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
-                        <label htmlFor="itemSelect">Item select: </label>
-                        <select name="itemSelect" id="itemSelect" className="form-control"
+                        <select name="itemSelect" id="itemSelect" className="form-control progress__form_select"
                             proptype="int"
                             onChange={handleControlledInputChange}>
 
@@ -81,49 +71,62 @@ export const MonthProgressList = props => {
                         </select>
                     </div>
                 </fieldset>
-                {
-                    itemConsumptions.map(item => {
+                <section className="progress">
+                    {
+                        itemConsumptions.map(item => {
 
-                        const currentTime = new Date()
+                            const currentTime = new Date()
 
-                        if (item.id === parseInt(selectedItem.itemSelect)) {
+                            if (item.id === parseInt(selectedItem.itemSelect)) {
 
-                            const monthsConsumptionsArray = item.consumptions.filter(consumption => {
-                                const consumptionTime = new Date(consumption.time)
+                                const monthsConsumptionsArray = item.consumptions.filter(consumption => {
+                                    const consumptionTime = new Date(consumption.time)
 
-                                return consumptionTime.getMonth() === currentTime.getMonth()
-                            })
-                            let monthsConsumptionsObj = {}
+                                    return consumptionTime.getMonth() === currentTime.getMonth()
+                                })
+                                let monthsConsumptionsObj = {}
 
-                            monthsConsumptionsArray.forEach(consumption => {
+                                monthsConsumptionsArray.forEach(consumption => {
 
-                                if (Object.keys(monthsConsumptionsObj).includes(consumption.itemId.toString())) {
-                                    const totalMonthCalories = (consumption.servings * item.calories) + monthsConsumptionsObj[consumption.itemId].calories
-                                    const totalMonthSugar = (consumption.servings * item.sugar) + monthsConsumptionsObj[consumption.itemId].sugar
-                                    const totalMonthCost = (consumption.servings * item.cost) + monthsConsumptionsObj[consumption.itemId].cost
-                                    monthsConsumptionsObj[consumption.itemId] = { "calories": totalMonthCalories, "sugar": totalMonthSugar, "cost": totalMonthCost }
-                                } else {
-                                    monthsConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
+                                    if (Object.keys(monthsConsumptionsObj).includes(consumption.itemId.toString())) {
+                                        const totalMonthCalories = (consumption.servings * item.calories) + monthsConsumptionsObj[consumption.itemId].calories
+                                        const totalMonthSugar = (consumption.servings * item.sugar) + monthsConsumptionsObj[consumption.itemId].sugar
+                                        const totalMonthCost = (consumption.servings * item.cost) + monthsConsumptionsObj[consumption.itemId].cost
+                                        monthsConsumptionsObj[consumption.itemId] = { "calories": totalMonthCalories, "sugar": totalMonthSugar, "cost": totalMonthCost }
+                                    } else {
+                                        monthsConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
 
 
-                                }
-                                // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
+                                    }
+                                    // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
 
-                            })
-                            return Object.keys(monthsConsumptionsObj).map(key => {
-                                return <MonthProgress key={key}
-                                    item={itemFound()}
-                                    calories={monthsConsumptionsObj[key].calories}
-                                    sugar={monthsConsumptionsObj[key].sugar}
-                                    cost={monthsConsumptionsObj[key].cost}
-                                // hours={hoursSinceConsumed}
-                                />
-                            })
+                                })
+                                return Object.keys(monthsConsumptionsObj).map(key => {
+                                    return <MonthProgress key={key}
+                                        item={itemFound()}
+                                        calories={monthsConsumptionsObj[key].calories}
+                                        sugar={monthsConsumptionsObj[key].sugar}
+                                        cost={monthsConsumptionsObj[key].cost}
+                                    // hours={hoursSinceConsumed}
+                                    />
+                                })
+                            }
                         }
-                    }
-                    )
+                        )
 
-                }
+                    }
+                </section>
+                <div className="progress__btns">
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/today")}>
+                        Today
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/week")}>
+                        Week
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress")}>
+                        Overall
+                    </button>
+                </div>
             </article>
         </div>
     )

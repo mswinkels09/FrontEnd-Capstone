@@ -64,7 +64,6 @@ export const ConsumptionForm = (props) => {
                 </fieldset>
                 <fieldset>
                     <div className="form-group">
-
                         <input type="number" id="consumptionServings" ref={servings} required autoFocus className="form-control consumption__form" placeholder="Number Of Servings Consumed" />
                     </div>
                 </fieldset>

@@ -23,7 +23,7 @@ export const ItemDetail = (props) => {
                 <h3 className="item_detail__name">{items.name}</h3>
                 <div className="item_detail item__form">Size: {items.size} oz</div>
                 <div className="item_detail item__form">Calories: {items.calories}</div>
-                <div className="item_detail item__form">Sugar: {items.sugar}</div>
+                <div className="item_detail item__form">Sugar: {items.sugar} g</div>
                 <div className="item_detail item__form">Cost: ${items.cost}</div>
                 <div className="item_detail__btns">
                     <button className="btn item_detail__btn" onClick={() => {

@@ -52,24 +52,13 @@ export const TodayProgressList = props => {
 
     return (
         <div>
-            <header className="header">
+            <header className="header progress__header">
                 <h1>TODAY'S PROGRESS</h1>
             </header>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress")}>
-                Overall Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/month")}>
-                Month's Consumptions
-            </button>
-            <button className="btn__todays_progress" onClick={() => props.history.push("/progress/week")}>
-                Week's Consumptions
-            </button>
-
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
-                        <label htmlFor="itemSelect">Item select: </label>
-                        <select name="itemSelect" id="itemSelect" className="form-control"
+                        <select name="itemSelect" id="itemSelect" className="form-control progress__form_select"
                             proptype="int"
                             onChange={handleControlledInputChange}>
 
@@ -82,49 +71,62 @@ export const TodayProgressList = props => {
                         </select>
                     </div>
                 </fieldset>
-                {
-                    itemConsumptions.map(item => {
+                <section className="progress">
+                    {
+                        itemConsumptions.map(item => {
 
-                        const currentTime = new Date()
+                            const currentTime = new Date()
 
-                        if (item.id === parseInt(selectedItem.itemSelect)) {
+                            if (item.id === parseInt(selectedItem.itemSelect)) {
 
-                            const todaysConsumptionsArray = item.consumptions.filter(consumption => {
-                                const consumptionTime = new Date(consumption.time)
+                                const todaysConsumptionsArray = item.consumptions.filter(consumption => {
+                                    const consumptionTime = new Date(consumption.time)
 
-                                return consumptionTime.getDate() === currentTime.getDate()
-                            })
-                            let todaysConsumptionsObj = {}
+                                    return consumptionTime.getDate() === currentTime.getDate()
+                                })
+                                let todaysConsumptionsObj = {}
 
-                            todaysConsumptionsArray.forEach(consumption => {
+                                todaysConsumptionsArray.forEach(consumption => {
 
-                                if (Object.keys(todaysConsumptionsObj).includes(consumption.itemId.toString())) {
-                                    const totalTodayCalories = (consumption.servings * item.calories) + todaysConsumptionsObj[consumption.itemId].calories
-                                    const totalTodaySugar = (consumption.servings * item.sugar) + todaysConsumptionsObj[consumption.itemId].sugar
-                                    const totalTodayCost = (consumption.servings * item.cost) + todaysConsumptionsObj[consumption.itemId].cost
-                                    todaysConsumptionsObj[consumption.itemId] = { "calories": totalTodayCalories, "sugar": totalTodaySugar, "cost": totalTodayCost }
-                                } else {
-                                    todaysConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
+                                    if (Object.keys(todaysConsumptionsObj).includes(consumption.itemId.toString())) {
+                                        const totalTodayCalories = (consumption.servings * item.calories) + todaysConsumptionsObj[consumption.itemId].calories
+                                        const totalTodaySugar = (consumption.servings * item.sugar) + todaysConsumptionsObj[consumption.itemId].sugar
+                                        const totalTodayCost = (consumption.servings * item.cost) + todaysConsumptionsObj[consumption.itemId].cost
+                                        todaysConsumptionsObj[consumption.itemId] = { "calories": totalTodayCalories, "sugar": totalTodaySugar, "cost": totalTodayCost }
+                                    } else {
+                                        todaysConsumptionsObj[consumption.itemId.toString()] = { "calories": (consumption.servings * item.calories), "sugar": (consumption.servings * item.sugar), "cost": (consumption.servings * item.cost) }
 
 
-                                }
-                                // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
+                                    }
+                                    // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
 
-                            })
-                            return Object.keys(todaysConsumptionsObj).map(key => {
-                                return <TodayProgress key={key}
-                                    item={itemFound()}
-                                    calories={todaysConsumptionsObj[key].calories}
-                                    sugar={todaysConsumptionsObj[key].sugar}
-                                    cost={todaysConsumptionsObj[key].cost}
-                                // hours={hoursSinceConsumed}
-                                />
-                            })
+                                })
+                                return Object.keys(todaysConsumptionsObj).map(key => {
+                                    return <TodayProgress key={key}
+                                        item={itemFound()}
+                                        calories={todaysConsumptionsObj[key].calories}
+                                        sugar={todaysConsumptionsObj[key].sugar}
+                                        cost={todaysConsumptionsObj[key].cost}
+                                    // hours={hoursSinceConsumed}
+                                    />
+                                })
+                            }
                         }
-                    }
-                    )
+                        )
 
-                }
+                    }
+                </section>
+                <div className="progress__btns">
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/week")}>
+                        Week
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/month")}>
+                        Month
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress")}>
+                        Overall
+                    </button>
+                </div>
             </article>
         </div>
     )

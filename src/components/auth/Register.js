@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 import "./Register.css"
 
 export const Register = (props) => {
-    const name = useRef()
+    const username = useRef()
     const email = useRef()
     const password = useRef()
     const verifyPassword = useRef()
@@ -29,7 +29,7 @@ export const Register = (props) => {
                         body: JSON.stringify({
                             email: email.current.value,
                             password: password.current.value,
-                            name: `${name.current.value}`
+                            username: `${username.current.value}`
                         })
                     })
                         .then(_ => _.json())
@@ -56,10 +56,10 @@ export const Register = (props) => {
             <form className="form--register" onSubmit={handleRegister}>
                 <section className="register__inputs">
                     <fieldset>
-                        <input ref={name} type="text"
-                            name="name"
+                        <input ref={username} type="text"
+                            name="username"
                             className="form-control register__form"
-                            placeholder="First name"
+                            placeholder="Username"
                             required autoFocus />
                     </fieldset>
                     <fieldset>

@@ -6,6 +6,8 @@ header {
     width: auto;
     margin: 0;
     border: 2px black solid;
+    position: sticky;
+    top: 0;
 }
 .header {
     justify-content: space-between;
@@ -36,11 +38,13 @@ h1 {
 }
 
 .btn__add_consumption {
-    
+    display: flex;
+    justify-content: center;
+    align-self: center;
     height: 50px;
     width: 50px;
     font-size: 50px;
-    text-align: center;
+    padding-bottom: 52px;
 }
 
 .item__name {
@@ -53,10 +57,14 @@ h1 {
     
 }
 
+.pageTitle {
+    font-size: 25px;
+}
+
 .item {
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 87%;
     margin: 5px;
     padding: 0;
     border: 3px solid black;
@@ -70,12 +78,13 @@ h1 {
     flex-direction: column;
     align-content: center;
     margin-top: 15px;
+    margin-bottom: 100px
 }
 .item__data {
     
     display: flex;
     flex-direction: row;
-    margin:3px;
+    margin:2px;
     background-color: white;
     color: #ed1a37;
     font-weight: bold;
@@ -88,8 +97,9 @@ h1 {
 }
 
 .item__data_title {
+    text-align: center;
     border: 2px black solid;
-    font-size: 12px;
+    font-size: 13px;
     padding:2px;
     width: 60%;
 }
@@ -98,7 +108,17 @@ h1 {
     justify-content: center;
     align-items: center;
     border: 2px black solid;
-    font-size: 15px;
+    font-size: 20px;
     padding:2px;
     width: 40%;
+    
+}
+
+.item__size {
+    text-shadow:
+    3px  3px 0 #000,
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
 }

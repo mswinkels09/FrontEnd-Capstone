@@ -13,6 +13,9 @@ import { ProgressList } from "./progress/ProgressList";
 import { TodayProgressList } from "./progress/TodayProgressList";
 import { MonthProgressList } from "./progress/MonthProgressList";
 import { WeekProgressList } from "./progress/WeekProgressList";
+import { TrophyProvider } from "./trophies/TrophyProvider";
+import { TrophyList } from "./trophies/TrophyList";
+import { CompetitorsList } from "./competitors/CompetitorsList";
 
 
 export const ApplicationViews = (props) => {
@@ -33,33 +36,41 @@ export const ApplicationViews = (props) => {
             <UserProvider>
                 <ItemProvider>
                     <ConsumptionProvider>
-                        <Route exact path="/" render={
-                            props => <ItemList {...props} />
-                        } />
-                        <Route path="/new_item" render={
-                            props => <ItemForm {...props}/>
-                        } />
-                        <Route path="/track_consumption" render={
-                            props => <ConsumptionForm {...props}/>
-                        } />
-                        <Route exact path="/progress" render={
-                            props => <ProgressList {...props}/>
-                        } />
-                        <Route path="/:itemId(\d+)" render={
-                            props => <ItemDetail {...props} />
-                        } />
-                        <Route path="/edit/:itemId(\d+)" render={
-                            props => <ItemForm {...props} />
-                        } /> 
-                        <Route path="/progress/today" render={
-                            props => <TodayProgressList {...props} />
-                        } /> 
-                        <Route path="/progress/month" render={
-                            props => <MonthProgressList {...props} />
-                        } /> 
-                        <Route path="/progress/week" render={
-                            props => <WeekProgressList {...props} />
-                        } /> 
+                        <TrophyProvider>
+                            <Route exact path="/" render={
+                                props => <ItemList {...props} />
+                            } />
+                            <Route path="/new_item" render={
+                                props => <ItemForm {...props}/>
+                            } />
+                            <Route path="/track_consumption" render={
+                                props => <ConsumptionForm {...props}/>
+                            } />
+                            <Route exact path="/progress" render={
+                                props => <ProgressList {...props}/>
+                            } />
+                            <Route path="/:itemId(\d+)" render={
+                                props => <ItemDetail {...props} />
+                            } />
+                            <Route path="/edit/:itemId(\d+)" render={
+                                props => <ItemForm {...props} />
+                            } /> 
+                            <Route path="/progress/today" render={
+                                props => <TodayProgressList {...props} />
+                            } /> 
+                            <Route path="/progress/month" render={
+                                props => <MonthProgressList {...props} />
+                            } /> 
+                            <Route path="/progress/week" render={
+                                props => <WeekProgressList {...props} />
+                            } /> 
+                            <Route path="/trophies" render={
+                                props => <TrophyList {...props} />
+                            } /> 
+                            <Route path="/competitors" render={
+                                props => <CompetitorsList {...props} />
+                            } /> 
+                        </TrophyProvider>
                     </ConsumptionProvider>
                 </ItemProvider>
             </UserProvider>

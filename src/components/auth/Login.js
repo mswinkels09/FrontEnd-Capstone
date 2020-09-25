@@ -4,13 +4,13 @@ import "./Login.css"
 
 
 export const Login = props => {
-    const email = useRef()
+    const username = useRef()
     const password = useRef()
     const existDialog = useRef()
     const passwordDialog = useRef()
 
     const existingUserCheck = () => {
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
+        return fetch(`http://localhost:8088/users?username=${username.current.value}`)
             .then(_ => _.json())
             .then(user => user.length ? user[0] : false)
     }
@@ -45,10 +45,10 @@ export const Login = props => {
                 <form className="form--home" onSubmit={handleLogin}>
                     <section className="login__inputs">
                     <fieldset className="fieldset">
-                        <input ref={email} type="email"
-                            id="email"
+                        <input ref={username} type="text"
+                            id="username"
                             className="form-control login__form"
-                            placeholder="Email address"
+                            placeholder="Username"
                             required autoFocus />
                     </fieldset>
                     <fieldset className="fieldset">
