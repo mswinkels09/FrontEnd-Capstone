@@ -5,6 +5,7 @@ import "./ProgressList.css";
 
 export const Progress = ({ item, hours, calories, sugar, cost }) => {
     
+    console.log(cost)
 
     return( 
         <section className="item">

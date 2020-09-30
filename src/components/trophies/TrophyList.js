@@ -18,15 +18,23 @@ export const TrophyList = props => {
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
-    const userItemObj = itemConsumptions.filter(item => {
+    const userItemArray = itemConsumptions.filter(item => {
         const userItemFound = item.consumptions.find(c => {
             return c.userId === currentUserId
         }) || {}
         const userItemId = userItemFound.userId
         return userItemId
     })
-  console.log(userItemObj)
-    const userTrophiesObj = userTrophies.filter(t => {
+
+    // const trophiesArray = trophies.filter(trophy => {
+    //     const foundTrophies = userTrophiesArray.find(uta => {
+    //         return uta.trophyId === trophy.id
+    //     }) || {}
+    //     const foundTrophyName 
+    // })
+
+
+    const userTrophiesArray = userTrophies.filter(t => {
         return t.userId === currentUserId
     })
 
@@ -47,54 +55,23 @@ export const TrophyList = props => {
                 <h1>TROPHIES</h1>
             </header>
             <article className="trophyList">
-                <div>COMING SOON</div>
-                <section className="progress">
-{/* 
+                <section className="trophies">
                 {
-                    userItemObj.map(item => {
-
-
-
+                    trophies.map(trophy => {
+                        const foundTrophies = userTrophiesArray.find(uta => {
+                            return uta.trophyId === trophy.id
+                        }) || {}
+                        if(foundTrophies.trophyId === trophy.id) {
+                            return <Trophy key={trophy.id}
+                                trophy={trophy}
+                        />
+                        }
                         
-                        let totalItemConsumption = 0
-                        let totalCalories = 0
-                        let totalSugarIntake = 0
-                        let totalCost = 0
-                        
-                            item.consumptions.forEach(consumption => {
 
+                    })
 
-                                totalItemConsumption += consumption.servings
+                }
 
-                                totalCalories = item.calories * totalItemConsumption
-                                totalSugarIntake = item.sugar * totalItemConsumption
-                                totalCost = item.cost * totalItemConsumption
-
-                            })
-                            let hoursSinceConsumed = 0
-
-                            const currentTime = new Date()
-
-                            const sortedConsumptionTimes = item.consumptions.sort((a, b) => { return new Date(b.time) - new Date(a.time) })
-
-                            sortedConsumptionTimes.find(consumption => {
-                                const consumptionTime = new Date(consumption.time)
-                                return hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime()) / (1000 * 60 * 60)).toFixed(1)
-                            })
-
-                            // const trophiesEarned = userTrophiesObj.find(ut => {
-
-                            // })
-
-                            return <Trophy key={item.id}
-                                item={item}
-                                calories={totalCalories}
-                                sugar={totalSugarIntake}
-                                cost={totalCost}
-                                hours={hoursSinceConsumed}
-                            />
-                        })
-                } */}
                 </section>
             </article>
         </div>

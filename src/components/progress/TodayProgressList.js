@@ -1,5 +1,4 @@
-//What the home page will look like with all the items listed
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { TodayProgress } from "./TodayProgress";
 import { UserContext } from "../users/UserProvider";
 import { ConsumptionContext } from "../consumption/ConsumptionProvider";
@@ -14,7 +13,9 @@ export const TodayProgressList = props => {
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
-    const userItemObj = itemConsumptions.filter(item => {
+    const itemsSelected = useRef(0)
+
+    const userItemArray = itemConsumptions.filter(item => {
         const userItemFound = item.consumptions.find(c => {
             return c.userId === currentUserId
         }) || {}
@@ -23,23 +24,71 @@ export const TodayProgressList = props => {
     })
 
 
-    const [selectedItem, setSelectedItem] = useState([])
 
-    const handleControlledInputChange = (itemObj) => {
-        const filteredItem = Object.assign({}, selectedItem)
-        filteredItem[itemObj.target.name] = itemObj.target.value
-        setSelectedItem(filteredItem)
-    }
+    // const [filteredItems, setFilteredItems] = useState([])
+    const [testVariable, setTestVariable] = useState([])
+    const [selectedItem, setSelectedItem] = useState({consumptions:{}})
+    const [defaultPage, setDefaultPage] = useState([])
 
-    const itemFound = () => {
-        const foundItem = itemConsumptions.find(c => {
-            return c.id === parseInt(selectedItem.itemSelect)
+    useEffect(() => {
+        const userItemArray = itemConsumptions.filter(item => {
+            const userItemFound = item.consumptions.find(c => {
+                return c.userId === currentUserId
+            }) || {}
+            const userItemId = userItemFound.userId
+            return userItemId
         })
-            || {}
-        return foundItem
+        setTestVariable(userItemArray)
+
+    }, [itemConsumptions])
+
+    
+    
+    useEffect(() => {
+        const itemFound = userItemArray.find(uia => {
+            return uia.id === parseInt(testVariable.itemSelect)
+        }) || {}
+        setSelectedItem(itemFound)
+    }, [testVariable])
+    
+    useEffect(() => {
+        //set default representation on page render 
+        if(parseInt(itemsSelected.current.value) === 0 ) {
+            setDefaultPage(testVariable)
+        } else{
+            setDefaultPage(testVariable)
+        }
+    }, [itemsSelected])
+
+    useEffect(() => {
+        setDefaultPage(testVariable)
+    }, [testVariable])
+
+    
+    const handleControlledInputChange = (browserEvent) => {
+        let filteredArray = []
+        const newTestVariable = Object.assign({}, testVariable)
+        newTestVariable[browserEvent.target.name] = browserEvent.target.value
+        console.log(newTestVariable, "newtestvariable")
+
+
+        const userItemArray = itemConsumptions.filter(item => {
+            const userItemFound = item.consumptions.find(c => {
+                return c.userId === currentUserId
+            }) || {}
+            const userItemId = userItemFound.userId
+            return userItemId
+        })
+        
+        const itemFound = userItemArray.find(uia => {
+            return uia.id === parseInt(newTestVariable.itemSelect)
+        }) || {}
+
+        filteredArray.push(itemFound)
+        setTestVariable(filteredArray)
     }
-
-
+            
+console.log(defaultPage, "defaultpageTODAY")
 
     useEffect(() => {
         getItems()
@@ -47,8 +96,6 @@ export const TodayProgressList = props => {
         getCurrentUser()
         getUserConsumptions(currentUserId)
     }, [])
-
-
 
     return (
         <div>
@@ -58,34 +105,30 @@ export const TodayProgressList = props => {
             <article className="progressList">
                 <fieldset>
                     <div className="div__add_consumption">
-                        <select name="itemSelect" id="itemSelect" className="form-control progress__form_select"
+                        <select name="itemSelect" id="itemSelect" ref={itemsSelected}  className="form-control progress__form_select"
                             proptype="int"
+                            defaultValue="0"
                             onChange={handleControlledInputChange}>
 
-                            <option value="0">Select a item</option>
-                            {userItemObj.map(item => (
-                                <option key={item.id} value={item.id}>
-                                    {item.name} - {item.size} oz
-                                </option>
+                            <option value="0">Item Select</option>
+                            {userItemArray.map(item => (
+                                <option key={item.id} value={item.id}>{item.name} - {item.size} oz</option>
+
                             ))}
                         </select>
                     </div>
                 </fieldset>
                 <section className="progress">
                     {
-                        itemConsumptions.map(item => {
-
+                        defaultPage.map(item => {
+                            console.log(defaultPage,"test default")
                             const currentTime = new Date()
-
-                            if (item.id === parseInt(selectedItem.itemSelect)) {
-
                                 const todaysConsumptionsArray = item.consumptions.filter(consumption => {
                                     const consumptionTime = new Date(consumption.time)
 
                                     return consumptionTime.getDate() === currentTime.getDate()
                                 })
                                 let todaysConsumptionsObj = {}
-
                                 todaysConsumptionsArray.forEach(consumption => {
 
                                     if (Object.keys(todaysConsumptionsObj).includes(consumption.itemId.toString())) {
@@ -103,20 +146,20 @@ export const TodayProgressList = props => {
                                 })
                                 return Object.keys(todaysConsumptionsObj).map(key => {
                                     return <TodayProgress key={key}
-                                        item={itemFound()}
-                                        calories={todaysConsumptionsObj[key].calories}
+                                        item={item}
+                                        calories={todaysConsumptionsObj[key].calories }
                                         sugar={todaysConsumptionsObj[key].sugar}
                                         cost={todaysConsumptionsObj[key].cost}
-                                    // hours={hoursSinceConsumed}
                                     />
                                 })
-                            }
-                        }
-                        )
+                        })
 
                     }
                 </section>
                 <div className="progress__btns">
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/today")}>
+                        Today
+                    </button>
                     <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/week")}>
                         Week
                     </button>

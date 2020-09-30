@@ -25,6 +25,7 @@ export const ProgressList = props => {
     })
     // const [filteredItems, setFilteredItems] = useState([])
     const [testVariable, setTestVariable] = useState([])
+    const [selectedItem, setSelectedItem] = useState({consumptions:{}})
     const [defaultPage, setDefaultPage] = useState([])
 
     useEffect(() => {
@@ -56,6 +57,7 @@ export const ProgressList = props => {
             setDefaultPage(testVariable)
         }
     }, [itemsSelected])
+
     useEffect(() => {
         setDefaultPage(testVariable)
     }, [testVariable])
@@ -75,17 +77,12 @@ export const ProgressList = props => {
             const userItemId = userItemFound.userId
             return userItemId
         })
-        console.log(userItemArray, "useritemArray")
-
         
         const itemFound = userItemArray.find(uia => {
             return uia.id === parseInt(newTestVariable.itemSelect)
         }) || {}
 
         filteredArray.push(itemFound)
-        console.log(filteredArray, "filteredarray")
-        console.log(itemFound, "itemfound")
-
         setTestVariable(filteredArray)
     }
             
@@ -161,7 +158,7 @@ console.log(defaultPage, "defaultpage1")
                 
                 </section>
                 <div className="progress__btns">
-                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/today")}>
+                <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/today")}>
                         Today
                     </button>
                     <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/week")}>
@@ -169,6 +166,9 @@ console.log(defaultPage, "defaultpage1")
                     </button>
                     <button className="btn__change_progress btn" onClick={() => props.history.push("/progress/month")}>
                         Month
+                    </button>
+                    <button className="btn__change_progress btn" onClick={() => props.history.push("/progress")}>
+                        Overall
                     </button>
                 </div>
             </article>
