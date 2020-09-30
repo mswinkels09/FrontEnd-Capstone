@@ -22,9 +22,9 @@ export const ItemList = props => {
     return (
         <div className="div__itemList">
             <header className="header">
-                <h1>PATH SO FAR</h1>
+                <h1 className="pageTitle">PATH SO FAR</h1>
                 <div className="div__add_consumption">
-                    <button className="btn__add_consumption" onClick={() => props.history.push("/track_consumption")}>
+                    <button className="btn__add_consumption btn" onClick={() => props.history.push("/track_consumption")}>
                             +
                     </button>
                 </div>
@@ -35,11 +35,18 @@ export const ItemList = props => {
                     itemConsumptions.map(item => {
                         
                         const userItemObj = item.consumptions.find(c => {
-                                return c.userId === currentUserId}) || {}
-                        
-                        if(userItemObj.userId === currentUserId) {                           
-                            let totalItemConsumption = 0
-                                item.consumptions.forEach(consumption => {
+                            return c.userId === currentUserId}) || {}
+                            
+                            if(userItemObj.userId === currentUserId) {   
+                                let totalItemConsumption = 0
+                                const todaysConsumptionsArray = item.consumptions.filter(consumption => {
+                                    const consumptionTime = new Date(consumption.time)
+                                    const currentTime = new Date()
+
+                                return consumptionTime.getDate() === currentTime.getDate()
+                            })   
+
+                                todaysConsumptionsArray.forEach(consumption => {
                                     totalItemConsumption += consumption.servings
                                 })
                                 let hoursSinceConsumed = 0

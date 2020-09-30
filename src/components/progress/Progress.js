@@ -5,11 +5,12 @@ import "./ProgressList.css";
 
 export const Progress = ({ item, hours, calories, sugar, cost }) => {
     
+    console.log(cost)
 
     return( 
         <section className="item">
             <h3 ><strong>
-                <div className="item__name">
+                <div className="item__name item__name_progress">
                    <div>{item.name}</div><div>{item.size} oz</div> 
                 </div>
             </strong></h3>
@@ -28,7 +29,7 @@ export const Progress = ({ item, hours, calories, sugar, cost }) => {
                 </div>
                 <div className="progress__data">      
                     <div className="progress__data_title">TOTAL MONEY SPENT: </div> 
-                    <div className="progress__data_data">{cost}</div>
+                    <div className="progress__data_data">${cost}</div>
                 </div>
             </div>
         </section>

@@ -82,7 +82,7 @@ export const ItemForm = (props) => {
     return (
         <form className="newItemForm">
             <header className="header">
-                <h1 className="itemForm__title">NEW ITEM</h1>
+                <h1 className="itemForm__title pageTitle">NEW ITEM</h1>
                 <button className="btn__back_consumption btn" onClick={() => {
                     props.history.push("/track_consumption")
                 }}>Back</button>

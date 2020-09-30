@@ -48,7 +48,7 @@ fieldset {
     height: 30px;
     background-color: white;
     color: #ed1a37;
-    font-size: 15px;
+    font-size: 13px;
     font-weight: bold;
     width: 200px;
     padding: 8px 0px;
@@ -90,4 +90,5 @@ fieldset {
 
 .consumptionForm__title {
     justify-content: flex-start;
+    font-size: 25px;
 }
