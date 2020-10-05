@@ -20,11 +20,11 @@ export const WeekProgress = ({ item, hours, calories, sugar, cost }) => {
                 </div>
                 <div className="progress__data">
                     <div className="progress__data_title">TOTAL GRAMS OF SUGAR CONSUMED:</div>  
-                    <div className="progress__data_data">{sugar}</div>
+                    <div className="progress__data_data">{sugar}g</div>
                 </div>
                 <div className="progress__data">      
                     <div className="progress__data_title">TOTAL MONEY SPENT: </div> 
-                    <div className="progress__data_data">{cost}</div>
+                    <div className="progress__data_data">${cost}</div>
                 </div>
             </div>
         </section>

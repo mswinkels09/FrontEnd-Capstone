@@ -6,6 +6,14 @@
     display: flex;
     justify-content: center;
     margin: 0;
+    text-shadow:
+    3px  3px 0 #000,
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+     color: #ed1a37;
+     font-weight: bold;
 }
 .item_detail__btn_close{
 align-self: flex-end;

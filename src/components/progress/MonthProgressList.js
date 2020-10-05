@@ -151,7 +151,6 @@ console.log(defaultPage, "defaultpage1")
                                         calories={monthsConsumptionsObj[key].calories}
                                         sugar={monthsConsumptionsObj[key].sugar}
                                         cost={monthsConsumptionsObj[key].cost}
-                                    // hours={hoursSinceConsumed}
                                     />
                                 })
                         })

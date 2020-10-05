@@ -48,6 +48,7 @@ export const ItemForm = (props) => {
 
     const name = useRef(null)
     const size = useRef(null)
+    const servings = useRef(null)
     const calories = useRef(null)
     const sugar = useRef(null)
     const cost = useRef(null)
@@ -62,6 +63,7 @@ export const ItemForm = (props) => {
                 id: item.id,
                 name: name.current.value,
                 size: parseInt(size.current.value),
+                servings: parseInt(servings.current.value),
                 calories: parseInt(calories.current.value),
                 sugar: parseInt(sugar.current.value),
                 cost: parseInt(cost.current.value)
@@ -71,6 +73,7 @@ export const ItemForm = (props) => {
             addItem({
                     name: name.current.value,
                     size: parseInt(size.current.value),
+                    servings: parseInt(servings.current.value),
                     calories: parseInt(calories.current.value),
                     sugar: parseInt(sugar.current.value),
                     cost: parseInt(cost.current.value)
@@ -103,6 +106,14 @@ export const ItemForm = (props) => {
                             <input type="number" id="itemSize" ref={size} required autoFocus className="form-control item__form" 
                             placeholder="Item size in oz"
                             defaultValue={item.size}
+                            onChange={handleControlledInputChange}/>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <div className="form-group">
+                            <input type="number" id="itemServings" ref={servings} required autoFocus className="form-control item__form" 
+                            placeholder="Total number of servings"
+                            defaultValue={item.servings}
                             onChange={handleControlledInputChange}/>
                         </div>
                     </fieldset>

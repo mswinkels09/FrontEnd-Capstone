@@ -141,8 +141,7 @@ console.log(defaultPage, "defaultpageTODAY")
 
 
                                     }
-                                    // hoursSinceConsumed = (Math.abs(currentTime.getTime() - consumptionTime.getTime())/ (1000 * 60 * 60)).toFixed(1)     
-
+                                    
                                 })
                                 return Object.keys(todaysConsumptionsObj).map(key => {
                                     return <TodayProgress key={key}

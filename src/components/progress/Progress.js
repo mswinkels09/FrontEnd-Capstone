@@ -1,5 +1,6 @@
 //how each item will be represented on DOM
 import React from "react"
+import { Link } from "react-router-dom"
 import "./ProgressList.css";
 
 
@@ -11,7 +12,7 @@ export const Progress = ({ item, hours, calories, sugar, cost }) => {
         <section className="item">
             <h3 ><strong>
                 <div className="item__name item__name_progress">
-                   <div>{item.name}</div><div>{item.size} oz</div> 
+                <Link to={`/progress/${item.id}`}>{item.name}</Link><div className="item__size">{item.size} oz</div>
                 </div>
             </strong></h3>
             <div className="progress__data_div">
@@ -25,7 +26,7 @@ export const Progress = ({ item, hours, calories, sugar, cost }) => {
                 </div>
                 <div className="progress__data">
                     <div className="progress__data_title">TOTAL GRAMS OF SUGAR CONSUMED:</div>  
-                    <div className="progress__data_data">{sugar}</div>
+                    <div className="progress__data_data">{sugar}g</div>
                 </div>
                 <div className="progress__data">      
                     <div className="progress__data_title">TOTAL MONEY SPENT: </div> 

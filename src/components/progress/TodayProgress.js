@@ -3,7 +3,7 @@ import React from "react"
 import "./ProgressList.css";
 
 
-export const TodayProgress = ({ item, hours, calories, sugar, cost }) => {
+export const TodayProgress = ({ item, calories, sugar, cost }) => {
     
 
 
@@ -17,15 +17,15 @@ export const TodayProgress = ({ item, hours, calories, sugar, cost }) => {
             <div className="progress__data_div">
                 <div className="progress__data">
                     <div className="progress__data_title">TOTAL CALORIES CONSUMED:</div>  
-                    <div className="progress__data_data">{(calories !== 0)?calories :"N/A"}</div>
+                    <div className="progress__data_data">{calories}</div>
                 </div>
                 <div className="progress__data">
                     <div className="progress__data_title">TOTAL GRAMS OF SUGAR CONSUMED:</div>  
-                    <div className="progress__data_data">{(sugar !== 0)?sugar :"N/A"}</div>
+                    <div className="progress__data_data">{sugar}g</div>
                 </div>
                 <div className="progress__data">      
                     <div className="progress__data_title">TOTAL MONEY SPENT: </div> 
-                    <div className="progress__data_data">${(cost !== 0)?cost :"N/A"}</div>
+                    <div className="progress__data_data">${cost}</div>
                 </div>
             </div>
         </section>
