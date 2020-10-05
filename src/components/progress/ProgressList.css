@@ -1,5 +1,5 @@
 .progress__header {
-    font-size: 13px;
+    font-size: 20px;
 }
 
 .progress__item {
@@ -70,22 +70,14 @@
     width: 100px;
 }
 
-.item__name_progress {
-    text-shadow:
-    3px  3px 0 #000,
-    -1px -1px 0 #000,  
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000;
-}
 
 .progress__form_select {
     margin: 0;
     height: 40px;
     background-color: white;
     color: #ed1a37;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: bold;
-    width: 200px;
+    width: 220px;
     padding: 8px 0px;
 }

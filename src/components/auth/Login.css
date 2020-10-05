@@ -6,11 +6,7 @@
     width: auto;
 }
 
-.form--home {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.login_form--home {
     border: 2px solid black;
     background-color: #07703c;
     height: 300px;
@@ -18,17 +14,25 @@
     margin-top: 75px;
 }
 
+.form--home{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .login__form{
     margin: 0;
-    height: 40px;
+    height: 50px;
+    width: 200px;
     background-color: white;
     color: #ed1a37;
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
 }
 
 .login__inputs {
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
     padding: 20px;
 }
 
@@ -40,6 +44,7 @@ fieldset {
     margin-bottom: 20px;
     height: 60px;
     width: 200px;
+    font-size: 18px;
 }
 
 .link--register {
@@ -51,5 +56,17 @@ fieldset {
 .btn__login_register {
     margin-bottom: 20px;
     height: 60px;
-    width: 200px;
+    width: 150px;
+    font-size: 15px;
 }
+
+.login__btn_close{
+    align-self: flex-end;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    font-size: 20px;
+    background-color: black;
+    color: #ed1a37;
+    }

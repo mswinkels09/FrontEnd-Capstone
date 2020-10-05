@@ -1,6 +1,12 @@
 
+.home{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
 .home__title {
-    font-size: 45px;
+    font-size: 48px;
     margin: 20px;
     display: flex;
     justify-content: center;
@@ -16,13 +22,19 @@
 }
 
 .home__title_div {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-self: center;
     border: 2px solid black;
     margin: 20px;
-    height: 275px;
+    height: 300px;
     padding-left: 80px;
     padding-right: 80px;
     padding-top: 0;
     background-color: white;
+    width: 40%;
+    text-align: center;
 }
 
 .auth {
@@ -39,6 +51,7 @@
     margin-bottom: 20px;
     height: 60px;
     width: 200px;
+    font-size: 20px;
 }
 
 .btn {
