@@ -124,15 +124,21 @@ console.log(defaultPage, "defaultpage1")
                         let totalCalories = 0
                         let totalSugarIntake = 0
                         let totalCost = 0
+                        let totalItemConsumed = 0
 
                         item.consumptions.forEach(consumption => {
 
 
                                 totalItemConsumption += consumption.servings
-
+                                if(totalItemConsumption >= item.servings){
+                                    totalItemConsumed ++
+                                }else{
+                                    totalItemConsumed = 1
+                                }
+                             console.log(totalItemConsumed,"totalitemconsumed")
                                 totalCalories = item.calories * totalItemConsumption
                                 totalSugarIntake = item.sugar * totalItemConsumption
-                                totalCost = item.cost * totalItemConsumption
+                                totalCost = item.cost * totalItemConsumed
 
                             })
                             let hoursSinceConsumed = 0

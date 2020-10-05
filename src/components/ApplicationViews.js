@@ -13,6 +13,7 @@ import { ProgressList } from "./progress/ProgressList";
 import { TodayProgressList } from "./progress/TodayProgressList";
 import { MonthProgressList } from "./progress/MonthProgressList";
 import { WeekProgressList } from "./progress/WeekProgressList";
+import { ProgressItemDetail } from "./progress/ProgressDetail";
 import { TrophyProvider } from "./trophies/TrophyProvider";
 import { TrophyList } from "./trophies/TrophyList";
 import { CompetitorsList } from "./competitors/CompetitorsList";
@@ -64,6 +65,9 @@ export const ApplicationViews = (props) => {
                             <Route path="/progress/week" render={
                                 props => <WeekProgressList {...props} />
                             } /> 
+                            <Route path="/progress/:itemId(\d+)" render={
+                                props => <ProgressItemDetail {...props} />
+                            } />
                             <Route path="/trophies" render={
                                 props => <TrophyList {...props} />
                             } /> 

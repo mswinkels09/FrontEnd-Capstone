@@ -2,44 +2,92 @@
 import React, { useContext, useEffect, useState } from "react"
 import { Competitor } from "./Competitors";
 import { UserContext } from "../users/UserProvider";
-import { ConsumptionContext } from "../consumption/ConsumptionProvider";
-import { ItemContext } from "../items/ItemProvider";
+import "../trophies/Trophy.css";
 import { TrophyContext } from "../trophies/TrophyProvider";
 
 
 export const CompetitorsList = props => {
-    const { getUserConsumptions, getConsumptionByItem, itemConsumptions } = useContext(ConsumptionContext)
-    const { getCurrentUser} = useContext(UserContext)
-    const { getItems} = useContext(ItemContext)
-    const {getTrophies, getTrophyById, getUserTrophies, trophies, userTrophies} = useContext(TrophyContext)
+    const { getCurrentUser, users, getUsers } = useContext(UserContext)
+    const { getTrophies, getTrophyById, getUserTrophies, trophies, userTrophies } = useContext(TrophyContext)
 
     const [userTrophiesFound, setUserTrophies] = useState({})
 
     const currentUserId = parseInt(localStorage.getItem("user"))
 
-    const userItemObj = itemConsumptions.filter(item => {
-        const userItemFound = item.consumptions.find(c => {
-            return c.userId === currentUserId
-        }) || {}
-        const userItemId = userItemFound.userId
-        return userItemId
-    })
-  console.log(userItemObj)
-    const userTrophiesObj = userTrophies.filter(t => {
-        return t.userId === currentUserId
+    // const trophiesArray = trophies.filter(trophy => {
+    //     const foundTrophies = userTrophiesArray.find(uta => {
+    //         return uta.trophyId === trophy.id
+    //     }) || {}
+    //     const foundTrophyName 
+    // })
+
+    const foundOtherUsers = users.filter(u => {
+        return u.id !== currentUserId
     })
 
-return (
-    <div>
-        <header className="header progress__header">
-            <h1>COMPETITORS</h1>
-        </header>
-        <article className="trophyList">
-            <div>COMING SOON</div>
-            <section className="progress">
-                {}
-            </section>
+    console.log(foundOtherUsers, "foundusers")
+
+
+    
+    const otherUserTrophiesArray = userTrophies.filter(t => {
+        return t.userId !== currentUserId
+    })
+    
+    console.log(otherUserTrophiesArray, "othertrophies")
+
+    const foundTrophyArray = trophies.filter(trophy => {
+            const foundTrophies = otherUserTrophiesArray.filter(uta => {
+                if(uta.trophyId === trophy.id) {
+                    return true
+                }
+            }) || {}
+            console.log(foundTrophies, "foundtrophyarray")
+            return foundTrophies
+    })
+
+
+    useEffect(() => {
+        getUsers()
+        getCurrentUser()
+        getTrophies()
+        getUserTrophies()
+    }, [])
+
+
+    return (
+        <div>
+            <header className="header progress__header">
+                <h1>Competitors</h1>
+            </header>
+            <article className="trophyList">
+                <section className="trophies">
+                    {
+                            foundOtherUsers.map(users => {
+                                
+                                    // if(foundTrophies.trophyId === trophy.id) {
+                                    //     if(foundTrophies.userId === users.id) {
+
+                                            return <Competitor key={users.id}
+                                                user={users}
+                                                // trophy={trophy}
+                                            />
+    
+                                            
+                                    //     }
+                                    // }
+                                    
+            
+                            
+                            })
+
+
+                        }
+
+                </section>
             </article>
         </div>
     )
 }
+
+
+
