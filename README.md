@@ -44,7 +44,6 @@ Features include:
 ## Sample API
 
 You can copy + paste sample data to get an idea of how it can be used or the empty data to try it out from scratch!
-***Event Type "other" HAS to have "id":6***
 
 ### Empty Data
 {
