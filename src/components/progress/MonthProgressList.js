@@ -98,7 +98,7 @@ console.log(defaultPage, "defaultpage1")
     return (
         <div>
             <header className="header progress__header">
-                <h1>MONTH'S PROGRESS</h1>
+                <h1 className="pageTitle">MONTH'S PROGRESS</h1>
             </header>
             <article className="progressList">
                 <fieldset>

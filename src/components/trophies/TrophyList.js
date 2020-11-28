@@ -52,7 +52,7 @@ export const TrophyList = props => {
     return (
         <div>
             <header className="header progress__header">
-                <h1>TROPHIES</h1>
+                <h1 className="pageTitle">TROPHIES</h1>
             </header>
             <article className="trophyList">
                 <section className="trophies">

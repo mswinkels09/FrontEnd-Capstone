@@ -4,6 +4,7 @@ html {
 
 header {
     margin: 0;
+    padding-left: 4px;
     border: 2px black solid;
 }
 .header {

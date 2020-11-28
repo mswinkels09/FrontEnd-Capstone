@@ -43,8 +43,8 @@ export const ConsumptionForm = (props) => {
     return (
         <form className="newConsumptionForm">
             <header className="header">
-                <h1 className="consumptionForm__title">TRACK CONSUMPTION</h1>
-                <button className="btn__back_home btn" onClick={() => {
+                <h1 className="pageTitle">TRACK CONSUMPTION</h1>
+                <button className="btn__back btn" onClick={() => {
                     props.history.push("/")
                 }}>Back</button>
             </header>
@@ -77,7 +77,7 @@ export const ConsumptionForm = (props) => {
                         evt.preventDefault() // Prevent browser from submitting the form
                         constructNewConsumption()
                     }}
-                    className="btn btn-item">
+                    className="btn btn__item">
                     Submit
                 </button>
                 </div>

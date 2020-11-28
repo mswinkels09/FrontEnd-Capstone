@@ -100,7 +100,7 @@ console.log(defaultPage, "defaultpageTODAY")
     return (
         <div>
             <header className="header progress__header">
-                <h1>TODAY'S PROGRESS</h1>
+                <h1 className="pageTitle">TODAY'S PROGRESS</h1>
             </header>
             <article className="progressList">
                 <fieldset>

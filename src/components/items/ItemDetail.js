@@ -19,7 +19,7 @@ export const ItemDetail = (props) => {
             <div>
                 <button className="item_detail__btn_close" onClick={() => {
                     props.history.push(`/`)
-                }}>X</button>
+                }}><div className="btn__close">X</div></button>
                 <h3 className="item_detail__name">{items.name}</h3>
                 <div className="item_detail item__form">Size: {items.size} oz</div>
                 <div className="item_detail item__form">Calories: {items.calories}</div>

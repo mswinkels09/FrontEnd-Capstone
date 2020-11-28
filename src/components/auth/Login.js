@@ -42,27 +42,32 @@ export const Login = props => {
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
             <section>
-                <form className="form--home" onSubmit={handleLogin}>
-                    <section className="login__inputs">
-                    <fieldset className="fieldset">
-                        <input ref={username} type="text"
-                            id="username"
-                            className="form-control login__form"
-                            placeholder="Username"
-                            required autoFocus />
-                    </fieldset>
-                    <fieldset className="fieldset">
-                        <input ref={password} type="password"
-                            id="password"
-                            className="form-control login__form"
-                            placeholder="Password"
-                            required />
-                    </fieldset>
-                    </section>
-                        <button type="submit" className="btn__login btn">
-                            GET BACK AT IT
-                        </button>
-                </form>
+                <div className="login_form--home">
+                    <button className="login__btn_close" onClick={() => {
+                        props.history.push(`/home`)
+                    }}><div className="btn__close">X</div></button>
+                    <form className="form--home" onSubmit={handleLogin}>
+                        <section className="login__inputs">
+                        <fieldset className="fieldset">
+                            <input ref={username} type="text"
+                                id="username"
+                                className="form-control login__form"
+                                placeholder="Username"
+                                required autoFocus />
+                        </fieldset>
+                        <fieldset className="fieldset">
+                            <input ref={password} type="password"
+                                id="password"
+                                className="form-control login__form"
+                                placeholder="Password"
+                                required />
+                        </fieldset>
+                        </section>
+                            <button type="submit" className="btn__login btn">
+                                GET BACK AT IT
+                            </button>
+                    </form>
+                </div>
             </section>
             <section className="link--register">
                 <button className="btn__login_register btn" onClick={() => props.history.push("/register")}>

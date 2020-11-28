@@ -57,7 +57,7 @@ export const CompetitorsList = props => {
     return (
         <div>
             <header className="header progress__header">
-                <h1>Competitors</h1>
+                <h1 className="pageTitle">COMPETITORS</h1>
             </header>
             <article className="trophyList">
                 <section className="trophies">

@@ -86,7 +86,7 @@ export const ItemForm = (props) => {
         <form className="newItemForm">
             <header className="header">
                 <h1 className="itemForm__title pageTitle">NEW ITEM</h1>
-                <button className="btn__back_consumption btn" onClick={() => {
+                <button className="btn__back btn" onClick={() => {
                     props.history.push("/track_consumption")
                 }}>Back</button>
             </header>
@@ -128,7 +128,7 @@ export const ItemForm = (props) => {
                     <fieldset>
                         <div className="form-group">
                             <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control item__form" 
-                            placeholder="sugar amount" 
+                            placeholder="Sugar amount" 
                             defaultValue={item.sugar}
                             onChange={handleControlledInputChange}/>
                         </div>
@@ -147,7 +147,7 @@ export const ItemForm = (props) => {
                             constructNewItem()
                         }}
                         className="btn btn__item">
-                        {editMode ? "Save Updates" : "Submit"}
+                        {editMode ? "Save" : "Submit"}
                         
                     </button>
                 </div>

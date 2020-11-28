@@ -54,11 +54,12 @@ h1 {
     margin: 0;
     padding: 5px;
     color: #ed1a37;
+    font-size: 25px;
     
 }
 
 .pageTitle {
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .item {
