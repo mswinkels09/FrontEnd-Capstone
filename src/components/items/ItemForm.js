@@ -128,7 +128,7 @@ export const ItemForm = (props) => {
                     <fieldset>
                         <div className="form-group">
                             <input type="number" id="itemSugar" ref={sugar} required autoFocus className="form-control item__form" 
-                            placeholder="sugar amount" 
+                            placeholder="Sugar amount" 
                             defaultValue={item.sugar}
                             onChange={handleControlledInputChange}/>
                         </div>
