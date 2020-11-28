@@ -17,7 +17,7 @@ Features include:
 * Details page will show the user basic nutritional values of that item as wellas how much the average cost of that item is.
 
 ## PICs
-| <img src="./images/Home.png" width="207"> | <img src="./images/So Far.png" width="207"> | <img src="./images/New Item.gif" width="207"> 
+| <img src="./images/Home.png" width="207"> | <img src="./images/So Far.png" width="207"> | <img src="./images/New Item.png" width="207"> 
 | :---: | :---: | :---: |
 | Home Page | Path So Far | Create New Item |
 
