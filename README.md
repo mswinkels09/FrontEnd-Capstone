@@ -40,7 +40,6 @@ Features include:
 7. In a separate terminal, run ```npm start``` from the repository directory
 8. This app was designed for phone screens so in your browser window press cmd + opt + j (Macs) or ctrl + shift + j (Windows) to open Dev Tools and click Toggle Device Toolbar (pictured below) to change browswer view
 
-<img src="./images/devTools.png" width="207"> 
 
 ## Sample API
 
