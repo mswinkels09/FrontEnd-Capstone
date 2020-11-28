@@ -46,6 +46,7 @@ Features include:
 You can copy + paste sample data to get an idea of how it can be used or the empty data to try it out from scratch!
 
 ### Empty Data
+```
 {
   "users": [],
   "items": [],
@@ -70,6 +71,7 @@ You can copy + paste sample data to get an idea of how it can be used or the emp
   ],
   "userTrophies": []
 }
+```
 
 ### Sample Data
 <details><summary>Click for Sample Data</summary>
